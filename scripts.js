@@ -1,7 +1,7 @@
 const prisma = require( './lib/prisma.js' );
 const bcrypt = require( 'bcryptjs' );
 
-exports.createUser = async ( username, email, password ) =>{
+const createUser = async ( username, email, password ) =>{
     const hashedPassword = await bcrypt.hash( password, 10 )
 
     try {
@@ -48,4 +48,20 @@ async function getUserById ( id, prisma ) {
     } 
 }
 
-module.exports = { getUserByUsername, getUserById };
+const getUserFoldersById = async ( id )  => {
+    try {
+        const folders = await prisma.folder.findMany({
+            where: {
+                userId: id,
+            },
+            include: {
+                files: true,
+            }
+        })
+        return folders;
+    } catch (error) {
+        console.log( error );
+    }
+}
+
+module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById };

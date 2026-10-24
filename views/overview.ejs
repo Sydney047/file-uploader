@@ -1,0 +1,14 @@
+<div>
+    <form action="/<%= user.id %>/create-folder" method="post">
+        <label for="newFolder"><input type="text" name="newFolder" id="newFolder" required></label>
+        <button type="submit">Create Folder</button>
+    </form>
+    <ul>
+        <% for ( let folder in locals.folders ) { %>
+            <li>
+                <h3><%= folder.name %></h3>
+                <p><%= folder.files?.length %> files</p>
+            </li>
+        <% } %>
+    </ul>
+</div>

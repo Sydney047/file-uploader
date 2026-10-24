@@ -29,10 +29,15 @@
             <% } %> 
         </aside>
     <% } else { %>
-        <main>
-            <% console.log( locals.user ) %>
-            <h1>Welcome back, <%= locals.user.username %>!</h1>
+        <aside>
+            <h2>Hi, <%= locals.user.username %></h2>
+            <button><a href="/recent">Recent</a></button>
+            <button><a href="/overview">Overview</a></button>
+            <button><a href="/favourites">Favourites</a></button>
             <button><a href="/logout">Sign Out</a></button>
+        </aside>
+        <main>
+            <%- include( 'overview' ) %>
         </main>
     <% } %>
     <%- include('footer') %>

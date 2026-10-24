@@ -2,10 +2,20 @@ const { validationResult, matchedData } = require( 'express-validator' );
 const { validateSignUp, validateLogin } = require( '../config/formValidation.js' );
 const passport = require( 'passport' );
 const db = require( '../scripts.js' );
+const prisma = require('../lib/prisma.js');
 
-exports.indexController = (req, res) => {
+exports.indexController =  async (req, res) => {
     const user = req.user ?? false;
-    res.render('index', { title: 'Landing Page', user });
+
+    const folders = await db.getUserFoldersById( +user.id )
+                                .then( async ( folders) => {
+                                    await prisma.$disconnect();
+                                    return folders;
+                                }).catch( err => {
+                                    console.log( err );
+                                }) ?? false;
+
+    res.render('index', { title: 'Landing Page', user, folders });
 }
 
 exports.signUpGet = ( req, res ) => {
