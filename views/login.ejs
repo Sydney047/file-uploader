@@ -1,0 +1,12 @@
+<form action="/login" method="post">
+    <% if ( locals.errors && locals.errors.length > 0 ) { %>
+        <ul class="errorMessages">
+            <% locals.errors.forEach( error => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+    <label for="username">Username: <input type="text" id="username" name="username" required></label>
+    <label for="password">Password: <input type="password" id="password" name="password" required></label>
+    <button type="submit">Login</button>
+</form>

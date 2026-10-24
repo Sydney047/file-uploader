@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include('navigation') %>
+    <% if ( !locals.user ) { %>
+        <main>
+            <h1>Welcome to File Uploader</h1>
+            <p>Upload your files easily and securely with us.</p>
+            <p>Consider this your personal cloud storage</p>
+            <button><a href="/sign-up">Click here to get started</a></button>
+        </main>
+        <aside>
+            <% if ( !locals.message ) { %>           
+                <form action="/contact-us" method="post" >
+                    <h2>Send Us A Message</h2>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            <% } else { %>
+                <h2>Thank you for reaching out to us!</h2>
+            <% } %> 
+        </aside>
+    <% } else { %>
+        <main>
+            <% console.log( locals.user ) %>
+            <h1>Welcome back, <%= locals.user.username %>!</h1>
+            <button><a href="/logout">Sign Out</a></button>
+        </main>
+    <% } %>
+    <%- include('footer') %>
+</body>
+</html>
