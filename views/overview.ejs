@@ -1,5 +1,5 @@
 <div>
-    <form action="/<%= user.id %>/create-folder" method="post">
+    <form action="/<%= user.id %>/create-folder" method="post" onsubmit="e.preventDefault();">
         <% if ( locals.errors && locals.errors.length > 0 ) { %>
             <ul class="errorMessages">
                 <% locals.errors.forEach( error => { %>
@@ -15,11 +15,32 @@
     <% } else { %>
         <ul>
             <% locals.folders.forEach ( folder => { %>
-                <li><a href="/<%= user.id %>/<%= folder.id %>/files">
-                    <h3><%= folder.name %></h3>
-                    <p><%= folder.files?.length %> files</p>
-                    <button><a href="/<%= user.id %>/<%= folder.id %>/deleteFolder">Delete Folder</a></button>
-                </li></a>
+                <li>
+                    <% if ( folder.edit ) { %>
+                        <form action="/<%= user.id %>/<%= folder.id %>/renameFolder" method="post" onclick="e.preventDefault()">
+                            <% if ( locals.editFolderErrors && locals.editFolderErrors.length > 0 ) { %>
+                                <ul class="errorMessages">
+                                    <% locals.editFolderErrors.forEach( error => { %>
+                                        <li><%= editFolderErrors.msg %></li>
+                                    <% }) %>
+                                </ul>
+                            <% } %>
+                            <input type="text" value="<%= folder.name %>" name="newFolder" >
+                        </form>
+                    <% } else { %>
+                        <a href="/<%= user.id %>/<%= folder.id %>/files"></a>
+                            <h3><%= folder.name %></h3>
+                            <p><%= folder.files?.length %> files</p>
+                            <button>
+                                <a href="/<%= user.id %>/<%= folder.id %>/renameFolder?currentFolderName=<%= folder.name %>">
+                                    Rename Folder
+                                </a>
+                            </button>
+                            <button><a href="/<%= user.id %>/<%= folder.id %>/deleteFolder">Delete Folder</a></button>
+                        </a>
+                    <% } %>
+                    
+                </li>
             <% }) %>
         </ul>
     <% } %>

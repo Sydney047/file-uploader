@@ -102,4 +102,55 @@ const deleteFolder = async ( folderId, userId ) => {
     }
 }
 
-module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder, deleteFolder };
+const updateFolderEdit = async ( userId, folderId ) => {
+    try {
+        await prisma.folder.update({
+            where: {
+                userId,
+                id: folderId,
+            },
+            data: {
+                edit: true,
+            },
+        });
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect();
+    }
+
+}
+
+const updateFolderName = async ( userId, folderId, updatedName ) => {
+    try {
+        await prisma.folder.update({
+            where: {
+                userId,
+                id: folderId
+            },
+            data: {
+                edit: false,
+            },
+        });
+
+        if ( updatedName ) {
+            await prisma.folder.update({
+                where: {
+                    userId,
+                    id: folderId
+                },
+                data: {
+                    name: updatedName,
+                },
+            });
+        };
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect();
+    }
+
+}
+
+module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById, 
+    createNewFolder, deleteFolder, updateFolderEdit, updateFolderName };

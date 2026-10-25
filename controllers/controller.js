@@ -104,3 +104,21 @@ exports.deleteFolder = async ( req, res ) => {
 
     res.status( 200 ).redirect( '/' );
 }
+
+exports.renameFolderGet  = async ( req, res ) => {
+    const { userId, folderId } = req.params;
+
+    await db.updateFolderEdit( +userId, +folderId );
+
+    res.redirect( '/' );
+}
+
+exports.renameFolderPost = [
+    validateCreateFolder, async ( req, res ) => {
+    const { userId, folderId } = req.params;
+    const { newFolder } = matchedData( req );
+
+    await db.updateFolderName( +userId, +folderId, newFolder );
+    res.redirect( '/' );
+}
+]
