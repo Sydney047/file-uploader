@@ -1,19 +1,22 @@
 const { validationResult, matchedData } = require( 'express-validator' );
-const { validateSignUp, validateLogin } = require( '../config/formValidation.js' );
+const { validateSignUp, validateLogin, validateCreateFolder } = require( '../config/formValidation.js' );
 const passport = require( 'passport' );
 const db = require( '../scripts.js' );
 const prisma = require('../lib/prisma.js');
 
 exports.indexController =  async (req, res) => {
     const user = req.user ?? false;
+    let folders = false;
 
-    const folders = await db.getUserFoldersById( +user.id )
+    if ( user ) {
+        folders = await db.getUserFoldersById( +user.id )
                                 .then( async ( folders) => {
                                     await prisma.$disconnect();
                                     return folders;
                                 }).catch( err => {
                                     console.log( err );
                                 }) ?? false;
+    }
 
     res.render('index', { title: 'Landing Page', user, folders });
 }
@@ -23,7 +26,8 @@ exports.signUpGet = ( req, res ) => {
 }
 
 exports.loginGet = ( req, res ) => {
-    res.render( 'form', { title: 'Login', login: true } );
+    const failedLogin = req.session?.messages ?? false;
+    res.render( 'form', { title: 'Login', login: true, failedLogin } );
 }
 
 exports.contactMessagePost = ( req, res ) => {
@@ -72,3 +76,20 @@ exports.logoutGet = ( req, res, next )=> {
         res.redirect( '/' );
     });
 }
+
+exports.createFolderPost = [
+    validateCreateFolder, ( req, res ) => {
+        const errors = validationResult( req );
+
+        if ( !errors.isEmpty() ) {
+            return res.render( 'index', { title: 'Home Page', errors: errors.array() } );
+        };
+
+        const { newFolder } = matchedData( req );
+        console.log( req, req.params );
+
+        db.createFolder( +req.params.id , newFolder );
+
+        res.render( 'index', { title: 'Home Page', user: req.user } );
+    }
+]

@@ -35,4 +35,12 @@ const validateLogin= [
         .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
 ]
 
-module.exports = { validateSignUp, validateLogin };
+const validateCreateFolder = [
+    body( 'newFolder' )
+        .trim()
+        .isAlphanumeric().withMessage( 'Folder name can only contain letters and numbers')
+        .notEmpty().withMessage( 'Enter a valid folder name' )
+        .isLength({ min: 3}).withMessage( 'Folder name must be at least 3 characters long' )
+]
+
+module.exports = { validateSignUp, validateLogin, validateCreateFolder };

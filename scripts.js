@@ -1,3 +1,4 @@
+const { name } = require('ejs');
 const prisma = require( './lib/prisma.js' );
 const bcrypt = require( 'bcryptjs' );
 
@@ -61,7 +62,23 @@ const getUserFoldersById = async ( id )  => {
         return folders;
     } catch (error) {
         console.log( error );
+    } 
+}
+
+const createFolder = async ( userId, name ) => {
+    try {
+        const newFolder = await prisma.folder.create({
+            data: {
+                userId,
+                name,
+            },
+        })
+        console.log( 'Folder ', newFolder, " has been created" );
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect();
     }
 }
 
-module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById };
+module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById, createFolder };

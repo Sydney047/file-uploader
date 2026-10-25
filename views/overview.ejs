@@ -1,5 +1,12 @@
 <div>
     <form action="/<%= user.id %>/create-folder" method="post">
+        <% if ( locals.errors && locals.errors.length > 0 ) { %>
+            <ul class="errorMessages">
+                <% locals.errors.forEach( error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
         <label for="newFolder"><input type="text" name="newFolder" id="newFolder" required></label>
         <button type="submit">Create Folder</button>
     </form>
