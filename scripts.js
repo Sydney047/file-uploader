@@ -80,4 +80,26 @@ const createNewFolder = async ( folderName, userId ) => {
     }
 }
 
-module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder };
+const deleteFolder = async ( folderId, userId ) => {
+    try {
+        await prisma.file.deleteMany({
+            where: {
+                folderId,
+            },
+        });
+        const folder = await prisma.folder.delete({
+            where: {
+                userId,
+                id: folderId,
+            },
+        });
+
+        return folder;
+    } catch (error) {
+        console.log( error );
+    } finally{
+        await prisma.$disconnect();
+    }
+}
+
+module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder, deleteFolder };

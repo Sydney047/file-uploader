@@ -10,4 +10,6 @@ router.post( '/sign-up', controller.signUpPost );
 router.post( '/login', controller.loginPost );
 router.get( '/logout', controller.logoutGet );
 router.post( '/:id/create-folder', controller.createFolderPost );
+router.get( '/:userId/:folderId/deleteFolder', controller.deleteFolder );
+
 module.exports =router;

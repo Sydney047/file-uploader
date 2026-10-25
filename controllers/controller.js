@@ -88,7 +88,19 @@ exports.createFolderPost = [
         const { newFolder } = matchedData( req );
         const response = await db.createNewFolder( newFolder, +req.params.id );
 
-        console.log( 'folder created, ' + response )
+        console.log( 'folder created, ' )
+        console.log( response );
+        
         res.status( 200 ).redirect( '/' );
     }
 ]
+
+exports.deleteFolder = async ( req, res ) => {
+    const { userId, folderId } = req.params;
+    const folder = await db.deleteFolder( +folderId, +userId );
+    
+    console.log( 'Folder deleted')
+    console.log( folder );
+
+    res.status( 200 ).redirect( '/' );
+}
