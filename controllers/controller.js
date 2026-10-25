@@ -78,18 +78,17 @@ exports.logoutGet = ( req, res, next )=> {
 }
 
 exports.createFolderPost = [
-    validateCreateFolder, ( req, res ) => {
+    validateCreateFolder, async ( req, res ) => {
         const errors = validationResult( req );
+        const user = req.user;
 
         if ( !errors.isEmpty() ) {
-            return res.render( 'index', { title: 'Home Page', errors: errors.array() } );
+            return res.render( 'index', { title: 'Home Page', errors: errors.array(), user } );
         };
-
         const { newFolder } = matchedData( req );
-        console.log( req, req.params );
+        const response = await db.createNewFolder( newFolder, +req.params.id );
 
-        db.createFolder( +req.params.id , newFolder );
-
-        res.render( 'index', { title: 'Home Page', user: req.user } );
+        console.log( 'folder created, ' + response )
+        res.status( 200 ).redirect( '/' );
     }
 ]

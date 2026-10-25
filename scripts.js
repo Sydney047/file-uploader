@@ -65,20 +65,19 @@ const getUserFoldersById = async ( id )  => {
     } 
 }
 
-const createFolder = async ( userId, name ) => {
+const createNewFolder = async ( folderName, userId ) => {
     try {
         const newFolder = await prisma.folder.create({
             data: {
+                name: folderName,
                 userId,
-                name,
             },
         })
-        console.log( 'Folder ', newFolder, " has been created" );
     } catch (error) {
         console.log( error );
-    } finally {
+    } finally{
         await prisma.$disconnect();
     }
 }
 
-module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById, createFolder };
+module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder };

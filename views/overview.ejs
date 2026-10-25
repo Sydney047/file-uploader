@@ -10,12 +10,18 @@
         <label for="newFolder"><input type="text" name="newFolder" id="newFolder" required></label>
         <button type="submit">Create Folder</button>
     </form>
-    <ul>
-        <% for ( let folder in locals.folders ) { %>
-            <li>
-                <h3><%= folder.name %></h3>
-                <p><%= folder.files?.length %> files</p>
-            </li>
-        <% } %>
-    </ul>
+    <% if ( locals.folders.length === 0 ) { %>
+        <p>You currently have no folders</p>
+    <% } else { %>
+        <ul>
+            <% locals.folders.forEach ( folder => { %>
+                <li><a href="/<%= user.id %>/<%= folder.id %>/files">
+                    <h3><%= folder.name %></h3>
+                    <p><%= folder.files?.length %> files</p>
+                    <button><a href="/<%= user.id %>/<%= folder.id %>/deleteFolder">Delete Folder</a></button>
+                </li></a>
+            <% }) %>
+        </ul>
+    }
+    
 </div>
