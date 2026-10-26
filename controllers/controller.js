@@ -3,6 +3,22 @@ const { validateSignUp, validateLogin, validateCreateFolder } = require( '../con
 const passport = require( 'passport' );
 const db = require( '../scripts.js' );
 const prisma = require('../lib/prisma.js');
+const crypto = require( 'crypto' );
+const multer = require( 'multer' );
+
+const storage = multer.diskStorage({
+    destination:  './public/data/' ,
+    filename: function( req, file, cb ){
+        crypto.randomBytes( 16, function ( err, raw ){
+            if( err ) return cb( err )
+            cb( null, file.originalname.split('.')[0] + '-' + raw.toString( 'hex' ) + '.' + file.originalname.split( '.' )[1] );              
+        })
+    }
+})
+const upload = multer({ 
+    storage,
+    limits: { fileSize: 2 * 1024 * 1024 },
+});
 
 exports.indexController =  async (req, res) => {
     const user = req.user ?? false;
@@ -129,4 +145,39 @@ exports.filesGet =  async ( req, res ) => {
     const folder = await db.getFolder( +userId, +folderId )
 
     res.render( 'files', { title: 'Files', user: req.user, folder } );
+}
+
+exports.addNewFile = ( req, res ) => {
+    upload.single( 'newFile' )( req, res, async ( err ) => {
+        if ( err instanceof multer.MulterError ) {
+            return res.status( 400 ).send( `Multer Error, ${ err.message }` )
+        } else if ( err ) {
+            return res.status( 400 ).send( `Unexpected Error, ${ err.message }` )
+        }
+
+        const { userId, folderId } = req.params;
+        const file = req.file;
+        console.log( file )
+
+        await db.createNewFile( +folderId, file.filename, file.size, file.mimetype, file.path );
+
+        res.redirect( `/${ userId }/${ folderId }/files`  );
+    }) 
+        
+}
+
+exports.showFileDetails = async ( req, res ) => {
+    const { userId, folderId, fileId } = req.params;
+
+    await db.updateShowFileDetails( +folderId, +fileId );
+
+    res.redirect( `/${ userId }/${ folderId }/files`  );
+}
+
+exports.hideFileDetails = async ( req, res ) => {
+    const { userId, folderId, fileId } = req.params;
+
+    await db.updateHideFileDetails( +folderId, +fileId );
+    
+    res.redirect( `/${ userId }/${ folderId }/files`  );
 }

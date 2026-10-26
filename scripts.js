@@ -171,5 +171,68 @@ const getFolder = async ( userId, folderId ) => {
     }
 }
 
-module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById, 
-    createNewFolder, deleteFolder, updateFolderEdit, updateFolderName, getFolder };
+const createNewFile = async ( folderId, filename, fileSize, fileMimetype, filePath ) => {
+    try {
+       const file = await prisma.file.create({
+        data: {
+            folderId,
+            name: filename,
+            size: fileSize,
+            mimetype: fileMimetype,
+            url: filePath,
+        },
+       }) ;
+       console.log( 'File Created' )
+       console.log( file )
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect();
+    }
+}
+
+const updateShowFileDetails = async ( folderId, fileId ) => {
+    try {
+       const updatedfile = await prisma.file.update({
+            where: {
+                folderId,
+                id: fileId,
+            },
+            data: {
+                details: true,
+            },
+        }); 
+
+        console.log( updatedfile );
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect()
+    }
+}
+
+const updateHideFileDetails = async ( folderId, fileId ) => {
+    try {
+       const updatedfile = await prisma.file.update({
+            where: {
+                folderId,
+                id: fileId,
+            },
+            data: {
+                details: false,
+            },
+        }); 
+
+        console.log( updatedfile );
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect()
+    }
+}
+
+module.exports = { 
+    createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder,
+    deleteFolder, updateFolderEdit, updateFolderName, getFolder, createNewFile,
+    updateShowFileDetails, updateHideFileDetails,
+};

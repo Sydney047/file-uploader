@@ -14,5 +14,8 @@ router.get( '/:userId/:folderId/deleteFolder', controller.deleteFolder );
 router.get( '/:userId/:folderId/renameFolder', controller.renameFolderGet );
 router.post( '/:userId/:folderId/renameFolder', controller.renameFolderPost );
 router.get( '/:userId/:folderId/files', controller.filesGet );
+router.post( '/:userId/:folderId/addNewFile', controller.addNewFile );
+router.get( '/:userId/:folderId/:fileId/showFileDetails', controller.showFileDetails );
+router.get( '/:userId/:folderId/:fileId/hideFileDetails', controller.hideFileDetails );
 
 module.exports =router;

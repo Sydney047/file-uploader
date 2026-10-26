@@ -13,7 +13,7 @@
              <h3><%= locals.folder.name %></h3>
         </aside>
         <main>
-            <form action="/<%= locals.user.id %>/<%= locals.folder.id %>/create-file" method="post" >
+            <form action="/<%= locals.user.id %>/<%= locals.folder.id %>/addNewFile" method="post" enctype="multipart/form-data" >
                 <input type="file" name="newFile" >
                 <button type="submit">Add New File</button>
             </form>
@@ -23,7 +23,27 @@
                 <ul>
                     <% locals.folder.files.forEach( file => { %>
                         <li>
-                            <h3><%= file.name %></h3>
+                            <div>
+                                <!-- add a file profile here -->
+                                <h3><%= file.name.split( '-' )[0] %></h3>
+                                <p>.<%= file.name.split( '.' )[1] %></p>
+                                <% if ( !file.details ) { %>
+                                <a href="/<%= locals.user.id %>/<%= locals.folder.id %>/<%= file.id %>/showFileDetails" >
+                                    Show File Details
+                                </a>
+                                <% } %>
+                            </div>
+                            <% if ( file.details ) { %>
+                                <div class="fileDetailsDiv">
+                                    <p>File Size: <%= (file.size/ ( 1024 * 1024) ).toFixed(2) %> MB</p>
+                                    <p>Mimetype: <%= file.mimetype %></p>
+                                    <p>CreatedAt: <%= file.createdAt %></p>
+                                    <a href="/<%= locals.user.id %>/<%= locals.folder.id %>/<%= file.id %>/hideFileDetails">
+                                        Hide File Details
+                                    </a>
+                                </div>
+                            <% } %>
+                            
                         </li>
                     <% }) %>
                 </ul>
