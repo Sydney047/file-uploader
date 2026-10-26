@@ -4,6 +4,7 @@ const session = require( 'express-session' );
 const passport = require( 'passport' );
 const path = require( 'path' );
 const routes  = require( './routes/formRoutes' );
+const  cors = require( 'cors' );
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use( session({ secret: process.env.SESSION_SECRET, resave: false, saveUninit
 app.use( passport.initialize());
 app.use( passport.session() );
 require( './config/passport' )( passport );
+app.use( cors() );
 
 const PORT = process.env.PORT
 app.listen( PORT || 3000, () =>{
@@ -27,3 +29,12 @@ app.listen( PORT || 3000, () =>{
 } )
 
 app.use( '/', routes );
+
+app.use( '/{*splat}', ( req, res )=> {
+    res.status( 404 ).render( '404' );
+})
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).render( 'error', { error: err } );
+});

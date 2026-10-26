@@ -13,7 +13,10 @@
              <h3><%= locals.folder.name %></h3>
         </aside>
         <main>
-            <form action="/<%= locals.user.id %>/<%= locals.folder.id %>/addNewFile" method="post" enctype="multipart/form-data" >
+            <form action="/<%= locals.user.id %>/<%= locals.folder.id %>/addNewFile?folderName=<%= locals.folder.name %>" method="post" enctype="multipart/form-data" >
+                <% if ( locals.error ) { %>
+                    <p><%= locals.error %></p>
+                <% } %>
                 <input type="file" name="newFile" >
                 <button type="submit">Add New File</button>
             </form>
@@ -31,7 +34,9 @@
                                 <a href="/<%= locals.user.id %>/<%= locals.folder.id %>/<%= file.id %>/showFileDetails" >
                                     Show File Details
                                 </a>
-                                <a href="/<%= locals.user.id %>/<%= locals.folder.id %>/<%= file.id %>/downloadFile" >Download File</a>
+                                <a href="/<%= locals.user.id %>/<%= locals.folder.id %>/<%= file.id %>/downloadFile?fileName=<%=file.name %>&mimetype=<%= file.mimetype %>&publicId=<%= file.publicId %>" >
+                                    Download File
+                                </a>
                                 <% } %>
                             </div>
                             <% if ( file.details ) { %>

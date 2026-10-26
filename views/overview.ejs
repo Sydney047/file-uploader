@@ -10,11 +10,11 @@
         <label for="newFolder"><input type="text" name="newFolder" id="newFolder" required></label>
         <button type="submit">Create Folder</button>
     </form>
-    <% if ( locals.folders.length === 0 ) { %>
+    <% if ( locals.folders?.length === 0 ) { %>
         <p>You currently have no folders</p>
     <% } else { %>
         <ul>
-            <% locals.folders.forEach ( folder => { %>
+            <% locals.folders?.forEach ( folder => { %>
                 <li>
                     <% if ( folder.edit ) { %>
                         <form action="/<%= user.id %>/<%= folder.id %>/renameFolder" method="post" onclick="e.preventDefault()">

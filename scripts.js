@@ -171,7 +171,7 @@ const getFolder = async ( userId, folderId ) => {
     }
 }
 
-const createNewFile = async ( folderId, filename, fileSize, fileMimetype, filePath ) => {
+const createNewFile = async ( folderId, filename, fileSize, fileMimetype, filePath, publicId ) => {
     try {
        const file = await prisma.file.create({
         data: {
@@ -180,6 +180,7 @@ const createNewFile = async ( folderId, filename, fileSize, fileMimetype, filePa
             size: fileSize,
             mimetype: fileMimetype,
             url: filePath,
+            publicId, 
         },
        }) ;
        console.log( 'File Created' )

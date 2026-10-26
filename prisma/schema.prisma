@@ -37,6 +37,7 @@ model File {
   size      Int
   mimetype  String
   url       String
+  publicId  String
   details   Boolean @default( false )
   folderId  Int
   folder    Folder   @relation(fields: [folderId], references: [id])

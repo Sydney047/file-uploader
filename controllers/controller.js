@@ -1,3 +1,4 @@
+require( 'dotenv' ).config();
 const { validationResult, matchedData } = require( 'express-validator' );
 const { validateSignUp, validateLogin, validateCreateFolder } = require( '../config/formValidation.js' );
 const passport = require( 'passport' );
@@ -5,6 +6,8 @@ const db = require( '../scripts.js' );
 const prisma = require('../lib/prisma.js');
 const crypto = require( 'crypto' );
 const multer = require( 'multer' );
+const cloudinary = require( 'cloudinary' ).v2;
+const fs = require( 'fs' );
 
 const storage = multer.diskStorage({
     destination:  './public/data/' ,
@@ -14,11 +17,18 @@ const storage = multer.diskStorage({
             cb( null, file.originalname.split('.')[0] + '-' + raw.toString( 'hex' ) + '.' + file.originalname.split( '.' )[1] );              
         })
     }
-})
+});
+
 const upload = multer({ 
     storage,
-    limits: { fileSize: 2 * 1024 * 1024 },
+    limits: { fileSize: 5 * 1024 * 1024 },
 });
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 exports.indexController =  async (req, res) => {
     const user = req.user ?? false;
@@ -141,10 +151,11 @@ exports.renameFolderPost = [
 
 exports.filesGet =  async ( req, res ) => {
     const { userId, folderId } = req.params;
+    const { error } = req.query;
 
     const folder = await db.getFolder( +userId, +folderId )
 
-    res.render( 'files', { title: 'Files', user: req.user, folder } );
+    res.render( 'files', { title: 'Files', user: req.user, folder, error } );
 }
 
 exports.addNewFile = ( req, res ) => {
@@ -156,10 +167,22 @@ exports.addNewFile = ( req, res ) => {
         }
 
         const { userId, folderId } = req.params;
+        const { folderName } = req.query;
         const file = req.file;
         console.log( file )
 
-        await db.createNewFile( +folderId, file.filename, file.size, file.mimetype, file.path );
+        try {
+            const uploadedFile = await cloudinary.uploader.upload( file?.path, { folder: folderName } );
+
+            await db.createNewFile( +folderId, file.filename, file.size, file.mimetype, uploadedFile.secure_url, uploadedFile.public_id );
+        } catch (error) {
+            console.log( 'Uploading error:' + error.message )
+            return res.redirect( `/${ userId }/${ folderId }/files?error=${ error.message } ` );
+        } finally {
+            fs.unlink( file?.path, err => {
+                console.log( err );
+            } );
+        }
 
         res.redirect( `/${ userId }/${ folderId }/files`  );
     }) 
@@ -183,14 +206,16 @@ exports.hideFileDetails = async ( req, res ) => {
 }
 
 exports.downloadFile = async ( req, res ) => {
-    const { folderId, fileId } = req.params;
+    const { fileName, mimetype, publicId } = req.query;
+    let resource_type;
 
-    const file = await db.getFile( +folderId, +fileId );
-    const fileName = file.name.split( '-' )[0] + '.' + file.name.split( '.' )[1];
+    const filename = fileName.split( '-' )[0] + '.' + fileName.split( '.' )[1];
 
-    res.download( file.url, fileName, ( err ) => {
-        if ( err || !res.headersSent )  {
-            res.status( 404 ).send( 'Failed to download file' );
-        };
-    })
+    ( mimetype.split('/')[0] === 'image' ) ? resource_type = 'image' :
+    ( mimetype.split('/')[0] === 'video' ) ? resource_type = 'video' :
+    ( mimetype.split('/')[1] === 'pdf' ) ? resource_type = 'video' : resource_type = 'raw';
+
+    const downloadurl = cloudinary.url( publicId, { flags: 'attachment', resource_type, secure: true } )
+
+    res.redirect( downloadurl );
 }
