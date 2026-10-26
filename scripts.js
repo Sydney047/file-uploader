@@ -231,8 +231,25 @@ const updateHideFileDetails = async ( folderId, fileId ) => {
     }
 }
 
+const getFile = async ( folderId, fileId ) => {
+    try {
+        const file = await prisma.file.findFirst({
+            where: {
+                folderId,
+                id: fileId,
+            },
+        });
+
+        return file;
+    } catch (error) {
+       console.log( error ) 
+    } finally {
+        await prisma.$disconnect()
+    }
+}
+
 module.exports = { 
     createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder,
     deleteFolder, updateFolderEdit, updateFolderName, getFolder, createNewFile,
-    updateShowFileDetails, updateHideFileDetails,
+    updateShowFileDetails, updateHideFileDetails, getFile,
 };

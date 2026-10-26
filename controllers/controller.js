@@ -181,3 +181,16 @@ exports.hideFileDetails = async ( req, res ) => {
     
     res.redirect( `/${ userId }/${ folderId }/files`  );
 }
+
+exports.downloadFile = async ( req, res ) => {
+    const { folderId, fileId } = req.params;
+
+    const file = await db.getFile( +folderId, +fileId );
+    const fileName = file.name.split( '-' )[0] + '.' + file.name.split( '.' )[1];
+
+    res.download( file.url, fileName, ( err ) => {
+        if ( err || !res.headersSent )  {
+            res.status( 404 ).send( 'Failed to download file' );
+        };
+    })
+}
