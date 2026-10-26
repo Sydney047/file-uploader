@@ -151,6 +151,25 @@ const updateFolderName = async ( userId, folderId, updatedName ) => {
     }
 
 }
+const getFolder = async ( userId, folderId ) => {
+    try {
+        const folder = await prisma.folder.findFirst({
+            where: {
+                userId,
+                id: folderId,
+            },
+            include: {
+                files: true,
+            },
+        });
+
+        return folder;
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect();
+    }
+}
 
 module.exports = { createUser, getUserByUsername, getUserById, getUserFoldersById, 
-    createNewFolder, deleteFolder, updateFolderEdit, updateFolderName };
+    createNewFolder, deleteFolder, updateFolderEdit, updateFolderName, getFolder };

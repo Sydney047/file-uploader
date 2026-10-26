@@ -28,7 +28,7 @@
                             <input type="text" value="<%= folder.name %>" name="newFolder" >
                         </form>
                     <% } else { %>
-                        <a href="/<%= user.id %>/<%= folder.id %>/files"></a>
+                        <a href="/<%= user.id %>/<%= folder.id %>/files">
                             <h3><%= folder.name %></h3>
                             <p><%= folder.files?.length %> files</p>
                             <button>

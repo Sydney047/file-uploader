@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <div class="container">
+        <%-  include( 'navigation') %>
+        <aside>
+            <!-- Open Folder logo/svg -->
+             <h3><%= locals.folder.name %></h3>
+        </aside>
+        <main>
+            <form action="/<%= locals.user.id %>/<%= locals.folder.id %>/create-file" method="post" >
+                <input type="file" name="newFile" >
+                <button type="submit">Add New File</button>
+            </form>
+            <% if ( locals.folder.files?.length <= 0 ) { %>
+                <p>Folder is empty.. add files to begin</p>
+            <% } else { %>
+                <ul>
+                    <% locals.folder.files.forEach( file => { %>
+                        <li>
+                            <h3><%= file.name %></h3>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </main>
+        <%- include( 'footer' ) %>
+    </div>   
+</body>
+</html>

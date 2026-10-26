@@ -115,10 +115,18 @@ exports.renameFolderGet  = async ( req, res ) => {
 
 exports.renameFolderPost = [
     validateCreateFolder, async ( req, res ) => {
-    const { userId, folderId } = req.params;
-    const { newFolder } = matchedData( req );
+        const { userId, folderId } = req.params;
+        const { newFolder } = matchedData( req );
 
-    await db.updateFolderName( +userId, +folderId, newFolder );
-    res.redirect( '/' );
-}
+        await db.updateFolderName( +userId, +folderId, newFolder );
+        res.redirect( '/' );
+    }
 ]
+
+exports.filesGet =  async ( req, res ) => {
+    const { userId, folderId } = req.params;
+
+    const folder = await db.getFolder( +userId, +folderId )
+
+    res.render( 'files', { title: 'Files', user: req.user, folder } );
+}
