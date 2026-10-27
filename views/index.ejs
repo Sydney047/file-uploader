@@ -39,7 +39,7 @@
                     <a href="/recent">Recent</a>
                 </button>
                 <button class="<%= !locals.indexPage ? 'active' : 'inactive' %>" >
-                    <a href="/overview">Overview</a>
+                    <a href="/">Overview</a>
                 </button>
                 <button class="<%= locals.indexPage === 'favourites' ? 'active' : 'inactive' %>" >
                     <a href="/favourites">Favourites</a>
@@ -55,8 +55,8 @@
                     <%- include( 'overview' ) %>
                 <%  } %>
             </main>
-        <% } %>
         </div>
+        <% } %>
         <%- include('footer') %>
     </div>
     

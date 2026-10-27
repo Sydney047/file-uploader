@@ -7,7 +7,7 @@
                 <% }) %>
             </ul>
         <% } %>
-        <label for="newFolder"><input type="text" name="newFolder" id="newFolder" required></label>
+        <label for="newFolder"><input type="text" name="newFolder" id="newFolder" required  placeholder="Enter folder name.."></label>
         <button type="submit">Create Folder</button>
     </form>
     <% if ( locals.folders?.length === 0 ) { %>
@@ -25,19 +25,25 @@
                                     <% }) %>
                                 </ul>
                             <% } %>
-                            <input type="text" value="<%= folder.name %>" name="newFolder" >
+                            </label><input type="text" value="<%= folder.name %>" name="newFolder" >
                         </form>
                     <% } else { %>
-                        <a href="/<%= user.id %>/<%= folder.id %>/files">
-                            <h3><%= folder.name %></h3>
-                            <p><%= folder.files?.length %> files</p>
-                            <button>
-                                <a href="/<%= user.id %>/<%= folder.id %>/renameFolder?currentFolderName=<%= folder.name %>">
-                                    Rename Folder
-                                </a>
-                            </button>
-                            <button><a href="/<%= user.id %>/<%= folder.id %>/deleteFolder">Delete Folder</a></button>
-                        </a>
+                        <span>
+                            <% if ( folder.favourite ) { %>
+                                <a href="/<%= user.id %>/<%= folder.id %>/removeFromFavourites">Remove from Favourites</a>
+                            <% }  else { %>
+                                <a href="/<%= user.id %>/<%= folder.id %>/addToFavourites?">Add To Favourites</a>
+                            <% }%>
+                        </span>
+                        <h3><%= folder.name %></h3>
+                        <p><%= folder.files?.length %> files</p>
+                        <button class="renameBtn">
+                            <a href="/<%= user.id %>/<%= folder.id %>/renameFolder?currentFolderName=<%= folder.name %>">
+                                Rename Folder
+                            </a>
+                        </button>
+                        <button class="deleteBtn"><a href="/<%= user.id %>/<%= folder.id %>/deleteFolder">Delete Folder</a></button>
+                        <a href="/<%= user.id %>/<%= folder.id %>/files" class="filesLink">Files</a>
                     <% } %>
                     
                 </li>

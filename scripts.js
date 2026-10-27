@@ -57,12 +57,17 @@ const getUserFoldersById = async ( id )  => {
             },
             include: {
                 files: true,
-            }
+            },
+            orderBy: {
+                id: 'desc',
+            },
         })
         return folders;
     } catch (error) {
         console.log( error );
-    } 
+    } finally {
+        await prisma.$disconnect();
+    }
 }
 
 const createNewFolder = async ( folderName, userId ) => {
@@ -171,6 +176,42 @@ const getFolder = async ( userId, folderId ) => {
     }
 }
 
+const addFolderToFavourites = async ( userId, folderId ) => {
+    try {
+       await prisma.folder.update({
+            where: {
+                userId,
+                id: folderId,
+            },
+            data: {
+                favourite: true,
+            },
+       });
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect();
+    }
+}
+
+const removeFolderFromFavourites = async ( userId, folderId ) => {
+    try {
+       await prisma.folder.update({
+            where: {
+                userId,
+                id: folderId,
+            },
+            data: {
+                favourite: false,
+            },
+       });
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect();
+    }
+}
+
 const createNewFile = async ( folderId, filename, fileSize, fileMimetype, filePath, publicId ) => {
     try {
        const file = await prisma.file.create({
@@ -250,7 +291,7 @@ const getFile = async ( folderId, fileId ) => {
 }
 
 module.exports = { 
-    createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder,
-    deleteFolder, updateFolderEdit, updateFolderName, getFolder, createNewFile,
-    updateShowFileDetails, updateHideFileDetails, getFile,
+    createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder,deleteFolder,
+    updateFolderEdit, updateFolderName, getFolder, createNewFile, updateShowFileDetails,
+    updateHideFileDetails, getFile, addFolderToFavourites, removeFolderFromFavourites
 };

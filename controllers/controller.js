@@ -32,19 +32,14 @@ cloudinary.config({
 
 exports.indexController =  async (req, res) => {
     const user = req.user ?? false;
+    const { indexPage } = req.query || false;
     let folders = false;
 
     if ( user ) {
-        folders = await db.getUserFoldersById( +user.id )
-                                .then( async ( folders) => {
-                                    await prisma.$disconnect();
-                                    return folders;
-                                }).catch( err => {
-                                    console.log( err );
-                                }) ?? false;
+        folders = await db.getUserFoldersById( +user.id ) ?? false;
     }
 
-    res.render('index', { title: 'Landing Page', user, folders });
+    res.render('index', { title: 'Landing Page', user, folders, indexPage });
 }
 
 exports.signUpGet = ( req, res ) => {
@@ -93,6 +88,56 @@ exports.loginPost =[
     }),
 ]
 
+exports.indexRecentController = async ( req, res ) => {
+    const user  = req.user;
+    let folders = false;
+
+    function recentFolders( folders ) {
+        const now = new Date()
+
+        const recent =  folders.filter( folder =>  {
+            const createdDate = new Date( folder.createdAt )
+            return ( now - 4 * 24 * 60 * 60 * 1000 ) <= createdDate;
+        })
+        return recent;
+    }
+
+    if ( user ) {
+        folders = await db.getUserFoldersById( +user.id )
+                                .then ( folders => {
+                                    return recentFolders( folders );
+                                }).catch( err => {
+                                    console.log( err );
+                                }) ?? false; 
+    }
+
+    res.render('index', { title: 'Recent Folders', user, folders, indexPage: 'recent' });
+}
+
+exports.indexFavouritesController = async ( req, res ) => {
+    const user = req.user ?? false;
+    let folders = false;
+
+    function favouriteFolders( folders ) {
+
+        const favourites =  folders.filter( folder =>  {
+            return folder.favourite;
+        })
+        return favourites;
+    }
+
+    if ( user ) {
+        folders = await db.getUserFoldersById( +user.id )
+                                .then( folders =>{
+                                    return  favouriteFolders( folders );
+                                }).catch( err => {
+                                    console.log( err );
+                                }) ?? false;
+    }
+
+    res.render('index', { title: 'Favourites', user, folders, indexPage: 'favourites' });
+}
+
 exports.logoutGet = ( req, res, next )=> {
     req.logout( err=> {
         if( err ) {
@@ -109,7 +154,9 @@ exports.createFolderPost = [
         const user = req.user;
 
         if ( !errors.isEmpty() ) {
-            return res.render( 'index', { title: 'Home Page', errors: errors.array(), user } );
+            const folders = await db.getUserFoldersById( +user.id ) ?? false;
+            
+            return res.status( 400 ).render( 'index', { title: 'Home Page', errors: errors.array(), user, folders } );
         };
         const { newFolder } = matchedData( req );
         const response = await db.createNewFolder( newFolder, +req.params.id );
@@ -148,6 +195,24 @@ exports.renameFolderPost = [
         res.redirect( '/' );
     }
 ]
+
+exports.addFolderToFavourites = async ( req, res ) => {
+    const { userId, folderId } = req.params;
+    const { indexPage } = req.query ?? false;
+
+    await db.addFolderToFavourites( +userId, +folderId );
+
+    res.status( 200 ).redirect( `/?indexPage=${ indexPage }` );
+}
+
+exports.removeFolderFromFavourites = async ( req, res ) => {
+    const { userId, folderId } = req.params;
+    const { indexPage } = req.query ?? false;
+
+    await db.removeFolderFromFavourites( +userId, +folderId );
+
+    res.status( 200 ).redirect( `/?indexPage=${ indexPage }` )
+}
 
 exports.filesGet =  async ( req, res ) => {
     const { userId, folderId } = req.params;

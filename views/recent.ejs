@@ -1,7 +1,63 @@
-<div  class="recentFolders">
-    <h2>Recent Folders</h2>
-    <ul>
-        <% locals.folders?.forEach( folder => { %>
-        <% }) %>
-    </ul>
+<div>
+    <form action="/<%= user.id %>/create-folder" method="post" onsubmit="e.preventDefault();">
+        <% if ( locals.errors && locals.errors.length > 0 ) { %>
+            <ul class="errorMessages">
+                <% locals.errors.forEach( error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+        <label for="newFolder"><input type="text" name="newFolder" id="newFolder" required></label>
+        <button type="submit">Create Folder</button>
+    </form>
+    <% if ( locals.folders?.length === 0 ) { %>
+        <p>You currently have recent no folders</p>
+    <% } else { %>
+        <h2>Recents</h2>
+        <ul>
+            <% locals.folders?.forEach ( folder => { %>
+                <li>
+                    <% if ( folder.edit ) { %>
+                        <form action="/<%= user.id %>/<%= folder.id %>/renameFolder" method="post" onclick="e.preventDefault()">
+                            <% if ( locals.editFolderErrors && locals.editFolderErrors.length > 0 ) { %>
+                                <ul class="errorMessages">
+                                    <% locals.editFolderErrors.forEach( error => { %>
+                                        <li><%= editFolderErrors.msg %></li>
+                                    <% }) %>
+                                </ul>
+                            <% } %>
+                            <input type="text" value="<%= folder.name %>" name="newFolder" >
+                        </form>
+                    <% } else { %>
+                            <span>
+                                <% if ( folder.favourite ) { %>
+                                    <a href="/<%= user.id %>/<%= folder.id %>/removeFromFavourites?indexPage=recent">
+                                        Remove from Favourites
+                                    </a>
+                                <% }  else { %>
+                                    <a href="/<%= user.id %>/<%= folder.id %>/addToFavourites?indexPage=recent">
+                                        Add To Favourites
+                                    </a>
+                                <% }%>
+                            </span>
+                            <h3><%= folder.name %></h3>
+                            <p><%= folder.files?.length %> files</p>
+                            <button class="renameBtn">
+                                <a href="/<%= user.id %>/<%= folder.id %>/renameFolder?currentFolderName=<%= folder.name %>">
+                                    Rename Folder
+                                </a>
+                            </button>
+                            <button class="deleteBtn">
+                                <a href="/<%= user.id %>/<%= folder.id %>/deleteFolder">
+                                    Delete Folder
+                                </a>
+                            </button>
+                        <a href="/<%= user.id %>/<%= folder.id %>/files" class="filesLink">Files</a>
+                    <% } %>
+                    
+                </li>
+            <% }) %>
+        </ul>
+    <% } %>
+    
 </div>
