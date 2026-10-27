@@ -17,6 +17,7 @@ app.use( session({ secret: process.env.SESSION_SECRET, resave: false, saveUninit
         httpOnly: true,
     }
  }) );
+ app.use( express.static( path.join( __dirname, 'public/assets' ) ) );
 app.use( passport.initialize());
 app.use( passport.session() );
 require( './config/passport' )( passport );

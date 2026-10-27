@@ -25,6 +25,7 @@ model Folder {
   id        Int      @id @default(autoincrement())
   name      String
   edit      Boolean  @default( false )
+  favourite Boolean @default( false )
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
   files     File[] 

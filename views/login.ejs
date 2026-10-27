@@ -1,4 +1,4 @@
-<form action="/login" method="post" onsubmit="e.preventDefault();">
+<form action="/login" method="post" onsubmit="e.preventDefault();" class="loginForm" >
     <% if ( locals.errors && locals.errors.length > 0 ) { %>
         <ul class="errorMessages">
             <% locals.errors.forEach( error => { %>

@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="formStyles.css">
     <title><%= title %></title>
 </head>
 <body>
-    <%- include('navigation') %>
-    <main>
-        <div class="loginButtonsDiv">
-            <button><a href="/sign-up">Sign Up</a></button>
-            <button><a href="/login">Login</a></button>
-        </div>
-        <% if ( locals.login ) { %>
-            <%- include('login') %>
-        <% } else { %>
-            <%- include('sign-up') %>
-        <% } %>
-    </main>
-    <%- include('footer') %>
+    <div class="formContainer">
+        <%- include('navigation') %>
+        <main>
+            <div class="loginButtonsDiv">
+                <button class="<%= locals.login ? 'inactive' : 'active' %>"><a href="/sign-up">Sign Up</a></button>
+                <button class="<%= !locals.login ? 'inactive' : 'active' %>"><a href="/login">Login</a></button>
+            </div>
+            <% if ( locals.login ) { %>
+                <%- include('login') %>
+            <% } else { %>
+                <%- include('sign-up') %>
+            <% } %>
+        </main>
+        <%- include('footer') %>
+    </div>
+    
 </body>
 </html>

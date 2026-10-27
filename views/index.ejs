@@ -3,43 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="indexStyles.css">
     <title><%= title %></title>
 </head>
 <body>
-    <%- include('navigation') %>
-    <% if ( !locals.user ) { %>
-        <main>
-            <h1>Welcome to File Uploader</h1>
-            <p>Upload your files easily and securely with us.</p>
-            <p>Consider this your personal cloud storage</p>
-            <button><a href="/sign-up">Click here to get started</a></button>
-        </main>
-        <aside>
-            <% if ( !locals.message ) { %>           
-                <form action="/contact-us" method="post" >
-                    <h2>Send Us A Message</h2>
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
+    <div class="indexContainer">
+        <%- include('navigation') %>
+            <% if ( !locals.user ) { %>
+        <div class="loggedOutLandingPage">
+                <main >
+                    <h1>Welcome to File Uploader</h1>
+                    <p>Upload your files easily and securely with us.</p>
+                    <p>Consider this your personal cloud storage</p>
+                    <button><a href="/sign-up">Click here to get started</a></button>
+                </main>
+                <aside>
+                    <% if ( !locals.message ) { %>           
+                        <form action="/contact-us" method="post" >
+                            <h2>Send Us A Message</h2>
+                            <label for="name">Name: <input type="text" id="name" name="name" required></label>                          
+                            <label for="message">Message: <textarea id="message" name="message" required></textarea></label>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    <% } else { %>
+                        <h2>Thank you for reaching out to us!</h2>
+                    <% } %> 
+                </aside>
+        </div>
             <% } else { %>
-                <h2>Thank you for reaching out to us!</h2>
-            <% } %> 
-        </aside>
-    <% } else { %>
-        <aside>
-            <h2>Hi, <%= locals.user.username %></h2>
-            <button><a href="/recent">Recent</a></button>
-            <button><a href="/overview">Overview</a></button>
-            <button><a href="/favourites">Favourites</a></button>
-            <button><a href="/logout">Sign Out</a></button>
-        </aside>
-        <main>
-            <%- include( 'overview' ) %>
-        </main>
-    <% } %>
-    <%- include('footer') %>
+        
+        <div class="loggedInLandingPage">
+            <aside>
+                <h2>Hi, <%= locals.user.username %></h2>
+                <button class="<%= locals.indexPage === 'recent' ? 'active' : 'inactive' %>" >
+                    <a href="/recent">Recent</a>
+                </button>
+                <button class="<%= !locals.indexPage ? 'active' : 'inactive' %>" >
+                    <a href="/overview">Overview</a>
+                </button>
+                <button class="<%= locals.indexPage === 'favourites' ? 'active' : 'inactive' %>" >
+                    <a href="/favourites">Favourites</a>
+                </button>
+                <button><a href="/logout">Sign Out</a></button>
+            </aside>
+            <main>
+                <% if ( locals.indexPage === 'recent' ) {  %>
+                    <%- include( 'recent' ) %>
+                <% } else if ( locals.indexPage === 'favourites' ) { %>
+                    <%- include( 'favourites' ) %>
+                <% } else { %>
+                    <%- include( 'overview' ) %>
+                <%  } %>
+            </main>
+        <% } %>
+        </div>
+        <%- include('footer') %>
+    </div>
+    
 </body>
 </html>
