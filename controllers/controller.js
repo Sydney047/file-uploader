@@ -218,9 +218,10 @@ exports.filesGet =  async ( req, res ) => {
     const { userId, folderId } = req.params;
     const { error } = req.query;
 
-    const folder = await db.getFolder( +userId, +folderId )
+    const folder = await db.getFolder( +userId, +folderId );
+    const files = await db.getFiles ( +folderId );
 
-    res.render( 'files', { title: 'Files', user: req.user, folder, error } );
+    res.render( 'files', { title: 'Files', user: req.user, folder, error, files } );
 }
 
 exports.addNewFile = ( req, res ) => {

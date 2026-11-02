@@ -1,11 +1,33 @@
+:root {
+ --box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+ --hover-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+ --button-shadow: rgba(0, 0, 0, 0.181) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+ --button-hover: rgba(0, 0, 0, 0.108) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+ --border-color: #091413;
+ --main-bg-color: #FAF6E9;
+ --secondary-bg-color: #FFFDF6;
+ --outline-color: #FFF2EB;
+ --btn-bg: #CFEBFF;
+ --btn-color: #091413;
+ --folder-nav-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+ background-color: var( --main-bg-color );
+
+}
+
 .indexContainer {
     display: grid;
-    grid-template:  10ch 1fr 15ch / 1fr;
-    gap: 2rem;
+    grid-template:  7ch 1fr 25ch / 1fr;
+    /* gap: 2rem; */
 }
 nav {
     display: flex;
     padding-left: 3ch;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    border-bottom: 5px solid var( --outline-color );
+    align-items: center;
+    background-color: var( --secondary-bg-color );
 }
 .loggedOutLandingPage {
     display: grid;
@@ -16,6 +38,8 @@ nav {
     gap: 3ch;
     align-items: start;
     justify-items: center;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
 }
 .loggedOutLandingPage > main {
     grid-area: main;
@@ -24,17 +48,39 @@ nav {
     }
     button {
         width: 45%;
-        padding: .2rem;
-        border-radius: .3rem;
+        padding: .6rem;
+        border-radius: 1rem;
+        border: none;
+        box-shadow: var( --button-shadow ) ;
+        height: 5ch;
+        text-align: center;
+        background-color: var( --btn-bg );
+
         a {
             width: 100%;
             height: 100%;
             text-decoration: none;
             display: inline-block;
+            color: var(--btn-color);
+            font-weight: 600;
+            font-size: medium;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                height: 3ch;
+                width: 4ch;
+                /* margin-right: 4ch; */
+            }
         }
     }
     button:hover {
         cursor: pointer;
+        box-shadow: var( --button-hover );
+    }
+    button:active {
+        outline: 2px solid aquamarine;
     }
     button, p {
         position: relative;
@@ -49,75 +95,131 @@ nav {
         grid-template: 7ch 7ch 10ch 4ch / 1fr;
         gap: 1ch;
         justify-items: start;
+        border: none;
+        border-radius: 12px;
+        padding: 40px;
+        box-shadow: var( --box-shadow );
+        background-color: var( --secondary-bg-color  );
 
         input, textarea {
             width: 100%;
+            height: 3ch;
+            border: none;
+            border-radius: 5px;
+            border-bottom: 2px solid var( --btn-color );
+            background-color: var( --secondary-bg-color );
         }
         textarea {
             height: 50px;
+            /* text-align: end; */
+        }
+        textarea::placeholder {
+            position: relative;
+            top: 2ch;
         }
         button {
             width: 70%;
             padding: .2rem;
-            border-radius: .3rem;
+            border-radius: .8rem;
+            border: none;
             position: relative;
             left: 5ch;
+            box-shadow: var( --button-shadow );
+            background-color: var( --btn-bg );
+            position: relative;
+            top: 1ch;
         }
         button:hover {
             cursor: pointer;
+            box-shadow: var( --button-hover );
+        }
+        button:active {
+            outline: 2px solid aquamarine;
         }
     }
 }
 
 .loggedInLandingPage {
-    display: grid;
-    grid-template-columns: .5fr 1fr 1fr;
-    grid-template-areas:
-        "aside main main main"
-        "aside main main main" ;
-    gap: 3ch;
-    align-items: start;
-    justify-items: center;
+    display: flex;
+    height: 100%;
+    margin-bottom: 2rem;
 }
 .loggedInLandingPage > aside {
-    grid-area: aside;
     display: flex;
-    flex-direction: column;
-    gap: 2ch;
-    align-items: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    gap: 1rem;
+    background-color: var( --secondary-bg-color );
+    min-height: 400px;
+    box-shadow: var( --folder-nav-shadow );
+    max-width: 15vw;
 
-    h2 {
-        font-size: 2rem;
-    }
     button {
-        width: 90%;
+        width: 70%;
+        height: 4ch;
         padding: .2rem;
-        border-radius: .3rem;
+        border-radius: .4rem;
+        background-color: transparent;
+        border: none;
+        position: relative;
+        bottom: -0.5ch;
+        z-index: 2;
+
         a {
             width: 100%;
             height: 100%;
             text-decoration: none;
             display: inline-block;
+            color: var( --btn-color );
+            z-index: 2;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+
+            svg {
+                height: 3ch;
+                width: 4ch;
+                position: relative;
+                bottom: 3.5px;
+            }
         }
     }
-    .inactive {
-        background-color: transparent;
-        border: none;
+    .active:hover {
+        outline: none;
+    }
+    .active::before {
+        content: "";
+        background-color: var(  --main-bg-color );
+        box-shadow: var( --box-shadow );
+        width: 100%;
+        height: 5ch;
+        position: absolute;
+        left: 0;
+        bottom: 0ch;
+        z-index: -1;
+        border-radius: 15px;
     }
     button:last-child {
         border: none;
-        margin-top: auto;
+        margin-top: 30vh;
         background-color: #680c07;
+        padding: .4rem;
         a {
           color: whitesmoke;  
         }
     }
+    button:last-child:hover {
+        box-shadow: var( --box-shadow  );
+        background-color: #E11A45;
+    }
     button:hover {
         cursor: pointer;
+        outline: 2px solid var( --btn-bg );
     }
 }
 .loggedInLandingPage > main {
-    grid-area: main;
     display: flex;
     width: 100%;
     height: 100%;
@@ -128,85 +230,208 @@ nav {
         flex-direction: column;
         gap: 1rem;
         align-items: center;
+        margin-top: 1rem;
 
+        .emptyFolder {
+            width: 100%;
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            div {
+                height: 20vh;
+                width: 100%;
+            }
+        }
         form {
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
 
             .errorMessages {
                 display: flex;
             }
             label {
+                width: 400px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+
                 input {
                     height: 3ch;
-                    width: clamp( 200px, 50%, 300px);
-                    border-radius: 12px 0 0 12px;
+                    width: 100%;
+                    height: 4ch;
+                    border-radius: 12px;
                     border: 2px solid black;
                     text-align: center;
                 }
             }
             button {           
                 border-radius: 0 12px 12px 0;
+                height: 4ch;
             }
         }
         h2 {
             align-self: flex-start;
+            position: relative;
+            left: 6ch;
+            margin-bottom: 0;
         }
         ul {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 3ch;
+            display: grid;
+            grid-template: 1fr / repeat( 3, 1fr );
+            gap: 2rem;
+            gap: 5ch;
             
             li  {        
                 position: relative;  
-                border: 1.5px solid black;
+                border: none;
+                border-radius: 16px;
                 list-style-type: none;
-                padding: 16px;
-                display: flex;
-                gap: 1em;
-                align-items: center;
-                justify-content: center;
-                height: clamp( 80px, 65%, 100px );
+                display: grid;
+                grid-template: 3fr 1fr / 1fr ;
+                height: 150px;
+                width: clamp(  250px, 20vw, 350px);
+                /* border: 1px solid black; */
+                padding: 10px;
+                background-color: var( --secondary-bg-color );
+                box-shadow: var( --box-shadow );
 
-                span {
-                    position: absolute;
-                    left: 3ch;
-                    top: 2ch;
+                .folderDetails {
+                    position: relative;
+                    /* bottom: 2ch; */
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    width: 100%;
+                    /* height: 100%; */
+                    border-bottom: 1px solid black;
 
+                    span {
+                        height: 60%;
+                        width: 20%;
+                        background-image: url( "./closed-folder.svg" );
+                        background-position: center;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                    }
+                    .folderName {
+                        font-size: 1.3rem;
+                        font-weight: 600;
+                        position: relative;
+                        right: 1ch;
+                    }
+                    .favourite {
+                        background-color: #15370D;
+                        color: #76C457;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 1px 3px;
+                        margin-left: auto;
+                    }
+                    span, .favourite, .folderName {
+
+                        position: relative;
+                        bottom: 2ch;
+                    }
+                    p:last-child {
+                        position: absolute;
+                        bottom: 0ch;
+                        left: 2ch;
+                    }
+                }
+                .folderModifies {
+                    position: relative;
+                    /* bottom: 3ch; */
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    width: 100%;
+                    align-items: center;
+                    justify-content: center;
+
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        ul {
+                            color: red;
+                        }
+                        label {
+                            input {
+                                height: 3ch;
+                                width: 100%;
+                                height: 4ch;
+                                border-radius: 12px;
+                                border: 2px solid black;
+                                text-align: center;
+                            }
+                        }
+                    }
+                    span {
+                        a {
+                            text-decoration: none;
+                            position: relative;
+
+                            svg {
+                                height: 3ch;
+                                width: 4ch;
+                                position: relative;
+                                /* bottom: 3.5px; */
+                            }
+                        }
+                    }
+                    button {
+                        border: none;
+                        border-radius: 12px;
+                        /* border: 1px solid black; */
+                        background-color: transparent;
+                        padding: 0;
+
+                        a  {
+                            text-decoration: none;
+
+                            svg {
+                                height: 3ch;
+                                width: 4ch;
+                                position: relative;
+                                /* bottom: -15px; */
+                            }
+                        }
+                    }
+                    button:hover {
+                        cursor: pointer;
+                    }
+                    .shareBtn {
+                        svg {
+                            height: 3ch;
+                            width: 4ch;
+                            position: relative;
+                            /* bottom: -15px; */
+                        }
+                    }
+                    .renameBtn {
+                        margin-left: auto;
+                    }
                     a {
                         text-decoration: none;
-                    }
-                }
-                button {                     
-                    position: absolute;
-                    right: 0ch;
-                    border-radius: 12px;
-                    padding: 4px;
-                    width: 120px;
+                        position: relative;
 
-                    a  {
-                        text-decoration: none;
+                        svg {
+                            height: 2ch;
+                            width: 3ch;
+                            position: relative;
+                            /* bottom: 3.5px; */
+                        }
                     }
                 }
-                .renameBtn {
-                    top: 2ch;
-                }
-                .deleteBtn {
-                    top: 6ch;
-                }
-                h3, p, .filesLink {
-                    position: relative;
-                    top: 3ch;
-                }
-                form {
-                    input {
-                        height: 3ch;
-                        border: none;
-                        border-bottom: 1.5px solid;
-                        border-radius: 5px;
-                    }
-                }
+            }
+            li:hover {
+                box-shadow: var( --hover-box-shadow );
             }
         }
     }
@@ -216,7 +441,13 @@ nav {
 footer {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
+    height: 100%;
+    background-color: var( --secondary-bg-color );
+    border: none;
+    border-radius: 10px 10px 0 0;
+    border-top: 5px solid var( --outline-color );
 }
 .topfooter {
     border-bottom: 1px solid black;

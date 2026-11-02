@@ -38,7 +38,7 @@ const validateLogin= [
 const validateCreateFolder = [
     body( 'newFolder' )
         .trim()
-        .isAlphanumeric().withMessage( 'Folder name must be alphanumeric without spaces')
+        .isAlphanumeric( 'en-US', { ignore: ' '} ).withMessage( 'Only letters, numbers and spaces are allowed' )
         .notEmpty().withMessage( 'Enter a valid folder name' )
         .isLength({ min: 3}).withMessage( 'Folder name must be at least 3 characters long' )
 ]

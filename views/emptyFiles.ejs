@@ -1,0 +1,39 @@
+<div class="emptyFiles">
+    <div>
+        <svg height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.209 512.209" xml:space="preserve" fill="#000000">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier"> <path style="fill:#EFEADD;" d="M418.532,101.727L144.877,1.975c-16.772-6.179-35.31,2.648-41.49,19.421L73.374,106.14h128l0,0h35.31 l63.559,88.276h135.062l11.476-31.779C455.608,137.92,443.25,110.554,418.532,101.727"></path> <g>
+            <path style="fill:#D4D0BA;" d="M407.056,152.927c-0.883,0-1.766,0-2.648-0.883L137.815,55.823 c-4.414-1.766-7.062-7.062-5.297-11.476s7.062-7.062,11.476-5.297l265.71,96.221c4.414,1.766,7.062,7.062,5.297,11.476 C414.118,151.161,410.587,152.927,407.056,152.927"></path>
+            <path style="fill:#D4D0BA;" d="M335.553,174.113c-0.883,0-1.766,0-2.648-0.883l-77.683-28.248 c-4.414-1.766-7.062-7.062-5.297-11.476c1.766-4.414,7.062-7.062,11.476-5.297l77.683,28.248c4.414,1.766,7.062,7.062,5.297,11.476 C342.615,171.465,339.084,174.113,335.553,174.113"></path> </g>
+            <path style="fill:#FBC176;" d="M0.105,220.899v264.828c0,15.007,11.476,26.483,26.483,26.483h459.034 c15.007,0,26.483-11.476,26.483-26.483V220.899c0-15.007-11.476-26.483-26.483-26.483H26.587 C11.581,194.416,0.105,205.892,0.105,220.899"></path>
+            <path style="fill:#C39A6E;" d="M300.243,194.416H35.415v-61.793c0-15.007,11.476-26.483,26.483-26.483h174.786L300.243,194.416z"></path> <g>
+            <path style="fill:#FFFFFF;" d="M159.001,256.209H53.07c-5.297,0-8.828-3.531-8.828-8.828s3.531-8.828,8.828-8.828h105.931 c5.297,0,8.828,3.531,8.828,8.828S164.298,256.209,159.001,256.209"></path>
+            <path style="fill:#FFFFFF;" d="M159.001,291.52H53.07c-5.297,0-8.828-3.531-8.828-8.828c0-5.297,3.531-8.828,8.828-8.828h105.931 c5.297,0,8.828,3.531,8.828,8.828C167.829,287.989,164.298,291.52,159.001,291.52"></path> </g> </g>
+        </svg>
+    </div>
+    <span>Nothing here yet</span>
+    <p>This folder is waiting for it's first file</p>
+    <form action="/<%= locals.user.id %>/<%= locals.folder.id %>/addNewFile?folderName=<%= locals.folder.name %>" method="post" enctype="multipart/form-data" >
+        <% if ( locals.error ) { %>
+            <p><%= locals.error %></p>
+        <% } %>
+
+        <label for="newFile" class="uploadFileLabel">
+            <input type="file" name="newFile" id="newFile">
+            <div class="uploadFileDiv">
+                <div class="uploadSvg"></div>
+                <span class="uploadText">Click or Drag & Drop File Here To Upload</span>
+                <span>Upload any files from your device </span>
+            </div>
+        </label>
+        <button type="submit" class="uploadBtn">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 15.75C12.4142 15.75 12.75 15.4142 12.75 15V4.02744L14.4306 5.98809C14.7001 6.30259 15.1736 6.33901 15.4881 6.06944C15.8026 5.79988 15.839 5.3264 15.5694 5.01191L12.5694 1.51191C12.427 1.34567 12.2189 1.25 12 1.25C11.7811 1.25 11.573 1.34567 11.4306 1.51191L8.43056 5.01191C8.16099 5.3264 8.19741 5.79988 8.51191 6.06944C8.8264 6.33901 9.29988 6.30259 9.56944 5.98809L11.25 4.02744L11.25 15C11.25 15.4142 11.5858 15.75 12 15.75Z" fill="#FFFDF6"></path>
+                <path d="M16 9C15.2978 9 14.9467 9 14.6945 9.16851C14.5853 9.24148 14.4915 9.33525 14.4186 9.44446C14.25 9.69667 14.25 10.0478 14.25 10.75L14.25 15C14.25 16.2426 13.2427 17.25 12 17.25C10.7574 17.25 9.75004 16.2426 9.75004 15L9.75004 10.75C9.75004 10.0478 9.75004 9.69664 9.58149 9.4444C9.50854 9.33523 9.41481 9.2415 9.30564 9.16855C9.05341 9 8.70227 9 8 9C5.17157 9 3.75736 9 2.87868 9.87868C2 10.7574 2 12.1714 2 14.9998V15.9998C2 18.8282 2 20.2424 2.87868 21.1211C3.75736 21.9998 5.17157 21.9998 8 21.9998H16C18.8284 21.9998 20.2426 21.9998 21.1213 21.1211C22 20.2424 22 18.8282 22 15.9998V14.9998C22 12.1714 22 10.7574 21.1213 9.87868C20.2426 9 18.8284 9 16 9Z" fill="#FFFDF6"></path> </g>
+            </svg>
+            <strong>Upload</strong>
+        </button>
+        <span class="fileNameField"></span>
+    </form>
+</div>

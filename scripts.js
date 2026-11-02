@@ -13,7 +13,7 @@ const createUser = async ( username, email, password ) =>{
                 password: `${ hashedPassword }`,
             }
         });
-        console.log( 'The following User Has been created: ', user );
+        
     } catch (error) {
         console.log( error  );
     } finally {
@@ -156,6 +156,7 @@ const updateFolderName = async ( userId, folderId, updatedName ) => {
     }
 
 }
+
 const getFolder = async ( userId, folderId ) => {
     try {
         const folder = await prisma.folder.findFirst({
@@ -169,6 +170,25 @@ const getFolder = async ( userId, folderId ) => {
         });
 
         return folder;
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect();
+    }
+}
+
+const getFiles = async ( folderId ) => {
+    try {
+        const files = await prisma.file.findMany({
+            where: {
+                folderId,
+            },
+            orderBy: {
+                id: 'desc',
+            },
+        });
+
+        return files;
     } catch (error) {
         console.log( error );
     } finally {
@@ -293,5 +313,5 @@ const getFile = async ( folderId, fileId ) => {
 module.exports = { 
     createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder,deleteFolder,
     updateFolderEdit, updateFolderName, getFolder, createNewFile, updateShowFileDetails,
-    updateHideFileDetails, getFile, addFolderToFavourites, removeFolderFromFavourites
+    updateHideFileDetails, getFile, addFolderToFavourites, removeFolderFromFavourites, getFiles
 };

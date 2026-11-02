@@ -15,14 +15,23 @@
                     <h1>Welcome to File Uploader</h1>
                     <p>Upload your files easily and securely with us.</p>
                     <p>Consider this your personal cloud storage</p>
-                    <button><a href="/sign-up">Click here to get started</a></button>
+                    <button>
+                        <a href="/sign-up">
+                            Get started
+                            <svg fill="#000000" viewBox="0 0 24 24" id="right-arrow-circle" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier"><circle id="primary" cx="12" cy="12" r="10" style="fill: #091413;"></circle>
+                                <path id="secondary" d="M17.62,11.31,14.5,9.17a1,1,0,0,0-1.5.69V11H7a1,1,0,0,0,0,2h6v1.14a1,1,0,0,0,1.5.69l3.12-2.14A.82.82,0,0,0,17.62,11.31Z" style="fill: #CFEBFF;"></path></g>
+                            </svg>
+                        </a>
+                    </button>
                 </main>
                 <aside>
                     <% if ( !locals.message ) { %>           
                         <form action="/contact-us" method="post" >
                             <h2>Send Us A Message</h2>
-                            <label for="name">Name: <input type="text" id="name" name="name" required></label>                          
-                            <label for="message">Message: <textarea id="message" name="message" required></textarea></label>
+                            <label for="name">Name: <input type="text" id="name" name="name" required placeholder="Enter your name..."></label>                          
+                            <label for="message">Message: <textarea id="message" name="message" required placeholder="Your message goes here..."></textarea></label>
                             <button type="submit">Send Message</button>
                         </form>
                     <% } else { %>
@@ -36,15 +45,31 @@
             <aside>
                 <h2>Hi, <%= locals.user.username %></h2>
                 <button class="<%= locals.indexPage === 'recent' ? 'active' : 'inactive' %>" >
-                    <a href="/recent">Recent</a>
+                    <a href="/recent">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10zm-4.581 3.324a1 1 0 0 0-.525-1.313L13 12.341V6.5a1 1 0 0 0-2 0v6.17c0 .6.357 1.143.909 1.379l4.197 1.8a1 1 0 0 0 1.313-.525z" fill="#091413"></path></g>
+                        </svg>
+                    </a>
                 </button>
                 <button class="<%= !locals.indexPage ? 'active' : 'inactive' %>" >
-                    <a href="/">Overview</a>
+                    <a href="/">
+                        <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="dashboard" class="icon glyph">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier"><rect x="2" y="2" width="9" height="11" rx="2"></rect><rect x="13" y="2" width="9" height="7" rx="2"></rect>
+                            <rect x="2" y="15" width="9" height="7" rx="2"></rect><rect x="13" y="11" width="9" height="11" rx="2"></rect></g>
+                        </svg>
+                    </a>
                 </button>
                 <button class="<%= locals.indexPage === 'favourites' ? 'active' : 'inactive' %>" >
-                    <a href="/favourites">Favourites</a>
+                    <a href="/favourites">
+                        <svg fill="#000000" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
+                            <path d="M1585.963 1920 960.48 1544.711 335 1920V170.586C335 76.536 411.536 0 505.586 0h909.79c94.05 0 170.587 76.536 170.587 170.586V1920Z" fill-rule="evenodd"></path> </g>
+                        </svg>
+                    </a>
                 </button>
-                <button><a href="/logout">Sign Out</a></button>
+                <button ><a href="/logout">Sign Out</a></button>
             </aside>
             <main>
                 <% if ( locals.indexPage === 'recent' ) {  %>
@@ -59,6 +84,6 @@
         <% } %>
         <%- include('footer') %>
     </div>
-    
+
 </body>
 </html>

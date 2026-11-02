@@ -1,0 +1,506 @@
+:root {
+ --box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+ --hover-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+ --button-shadow: rgba(0, 0, 0, 0.181) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+ --button-hover: rgba(0, 0, 0, 0.108) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+ --border-color: #091413;
+ --main-bg-color: #FAF6E9;
+ --secondary-bg-color: #FFFDF6;
+ --outline-color: #FFF2EB;
+ --btn-bg: #CFEBFF;
+ --btn-color: #091413;
+ --folder-nav-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+ background-color: var( --main-bg-color );
+
+}
+
+.container {
+    display: grid;
+    grid-template:  1fr 25ch / 1fr;
+}
+
+.subContainer {
+    display: flex;
+    height: 100%;
+    margin-bottom: 2rem;
+}
+
+.subContainer > aside {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-top: 2rem;
+        /* gap: 1rem; */
+        background-color: var( --secondary-bg-color );
+        min-height: 400px;
+        box-shadow: var( --folder-nav-shadow );
+        max-width: 15vw;
+        min-width: 10vw;
+
+        button {
+            width: 70%;
+            height: 5ch;
+            padding: .2rem;
+            border-radius: .4rem;           
+            background-color: var( --main-bg-color );
+            outline: 2px solid var( --btn-color );
+            border: none;
+            transition: all 250ms ease;
+            align-self: center;
+            position: sticky;
+            top: 2rem;
+            left: 0;
+
+            a {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                font-weight: 600;
+                color: var( --btn-color );
+
+                svg {
+                    height: 3ch;
+                    width: 4ch;
+                    position: relative;
+                    /* bottom: 3.5px; */
+                }
+            }
+        }
+        button:hover {
+            box-shadow: var( --box-shadow );
+            outline: none;
+            transform: scale( 1.1 );
+        }
+        div {
+            width: 50%;
+            align-self: center;
+            svg {
+                width: 100%;
+            }
+        }
+        span {
+            align-self: center;
+            position: relative;
+            bottom: 6ch;
+            strong {
+                font-size: 1.6rem;
+            }
+        }
+}
+
+.subContainer > main {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        width: 95%;
+        height: 15ch;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 2rem;
+        margin-bottom: 1rem;
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            width: 100%;
+
+            svg {
+                width: 2ch;
+                height: 2.5ch;
+            }
+            span {
+                strong {
+                    font-size: 1.3rem;
+                }
+            }
+            .newFileForm {
+                margin-left: auto;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+                input {
+                    position: relative;
+                    top: 1ch;                   
+                    padding: .5rem 1rem;
+                    border-radius: .4rem;
+                    height: 3.5ch;
+                }
+                input::file-selector-button {
+                    border-radius: .4rem 0 0 .4rem;           
+                    /* background-color: var( --main-bg-color ); */
+                    /* outline: 2px solid var( --btn-color ); */
+                    /* border: none; */
+                    transition: all 250ms ease;
+                    height: 3.5ch;
+                }
+                input::file-selector-button:hover {
+                    box-shadow: var( --box-shadow );
+                    outline: none;
+                    transform: scale( 1.1 );
+                    cursor: pointer;
+                }
+                button {
+                    display: flex;
+                    flex-direction: row;
+                    gap: .5rem;
+                    height: 3.5ch;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #D98327;
+                    color: var( --secondary-bg-color );
+                    border: none;                   
+                    padding: 1rem 1.3rem;
+                    border-radius: 8px;
+                }
+            }
+        }
+        div:last-child {
+            width: 100%;
+            display: flex;  
+            align-items: center;
+            padding-right: 5rem;
+
+            form {
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                width: 100%;
+
+                input {
+                    padding: .2rem .5rem;
+                    border-radius: .4rem;           
+                    background-color: var( --main-bg-color );
+                    outline: 2px solid var( --btn-color );
+                    border: none;
+                    transition: all 250ms ease;
+                    width: 40%;
+                }
+            }
+        }
+    }
+    form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+
+            label {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+
+                input[type="file"] {
+                    display: none;
+                }
+                .uploadFileDiv {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    border: 2px dashed var( --btn-color );
+                    border-radius: .4rem;
+                    padding: 1rem;
+
+                    .uploadSvg {
+                        width: 15ch;
+                        height: 15ch;
+                        background-image: url( "/upload.svg" );
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        margin-bottom: 1rem;
+                    }
+                    .uploadText {
+                        font-size: 1.3rem;
+                        font-weight: 600;
+                        color: var( --btn-color );
+                    }
+                    span {
+                        font-size: 1rem;
+                        color: var( --btn-color );
+                    }
+                }  
+            }
+            .fileNameField {
+                margin-top: 1rem;
+                font-size: 1rem;
+                font-weight: 600;
+                color: var( --btn-color );
+            }
+
+            button {
+                display: flex;
+                    flex-direction: row;
+                    gap: .5rem;
+                    height: 3.5ch;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #D98327;
+                    color: var( --secondary-bg-color );
+                    outline: none;                   
+                    padding: 1.3rem 1.3rem;
+
+                &:hover {
+                    box-shadow: var( --box-shadow );
+                    outline: none;
+                    transform: scale( 1.1 );
+                    cursor: pointer;
+                }
+                svg {
+                    height: 2.5ch;
+                    width: 2.5ch;
+                }
+            }
+        }
+    }
+    .emptyFiles {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+
+            label {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+
+                input[type="file"] {
+                    display: none;
+                }
+                .uploadFileDiv {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    border: 2px dashed var( --btn-color );
+                    border-radius: .4rem;
+                    padding: 1rem;
+
+                    .uploadSvg {
+                        width: 15ch;
+                        height: 15ch;
+                        background-image: url( "/upload.svg" );
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        margin-bottom: 1rem;
+                    }
+                    .uploadText {
+                        font-size: 1.3rem;
+                        font-weight: 600;
+                        color: var( --btn-color );
+                    }
+                    span {
+                        font-size: 1rem;
+                        color: var( --btn-color );
+                    }
+                }  
+            }
+            .fileNameField {
+                margin-top: 1rem;
+                font-size: 1rem;
+                font-weight: 600;
+                color: var( --btn-color );
+            }
+
+            .uploadBtn {
+                margin-top: 1rem;
+                padding: 1rem 2rem;
+                border-radius: .4rem;           
+                background-color: #D98327;
+                /* outline: 2px solid var( --btn-color ); */
+                border: none;
+                transition: all 250ms ease;
+
+                &:hover {
+                    box-shadow: var( --box-shadow );
+                    outline: none;
+                    transform: scale( 1.1 );
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+    ul {
+        display: grid;
+        width: 98%;
+        grid-template: 1fr / repeat( 3, 1fr );
+        gap: 1rem;
+        justify-items: center;
+
+        li { 
+            display: grid;
+            border: none;
+            border-radius: 16px;
+            list-style-type: none;
+            min-height: 150px;
+            width: clamp(  250px, 20vw, 350px);
+            padding: 10px;
+            background-color: var( --secondary-bg-color );
+            box-shadow: var( --box-shadow );
+
+            .fileNameField {
+                    display: flex;
+                    flex-direction: column;
+
+                    .fileImage {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: flex-start;
+                        width: 100%;
+                        height: 100px;
+                        gap: .5rem;
+
+                        img {
+                            align-self: center;
+                            max-width: 100%;
+                            max-height: 70%;
+                            object-fit: contain;
+                        }
+                    }   
+                    .fileControls {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        width: 100%;
+                        height: 50px;
+                        margin-top: .5rem;
+                        border-top: 1px solid var( --border-color );
+
+                        button {
+                            background-color: transparent;
+                            border: none;
+
+                            &:hover {
+                                cursor: pointer;
+                            }   
+                            svg {
+                                width: 3ch;
+                                height: 3.5ch;
+                            }
+                        }
+                        a {
+                            text-decoration: none;
+                            color: var( --btn-color );
+                            font-weight: 600;
+
+                            svg {
+                                width: 3ch;
+                                height: 3.5ch;
+                            }
+                        }
+                        a:last-child {
+                            margin-left: auto;
+                        }
+                    }
+            }
+            .fileDetailsDiv {
+                display: flex;
+                flex-wrap: wrap;
+                position: relative;
+                width: 100%;
+                height: 100%;
+                gap: 0 2rem;              
+                border-top: 1px solid var( --border-color );
+
+                p {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: .5rem; 
+
+                    svg {
+                        width: 3ch;
+                        height: 3.5ch;
+                    }
+                }   
+                p:first-child {
+                    svg {
+                        width: 2ch;
+                        height: 3ch;
+                    }
+                }   
+                a:last-child{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+
+                    svg {
+                        width: 4ch;
+                        height: 4ch;
+                    }
+                }          
+            }
+        }
+        
+    }
+
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var( --secondary-bg-color );
+    border: none;
+    border-radius: 10px 10px 0 0;
+    border-top: 5px solid var( --outline-color );
+}
+.topfooter {
+    border-bottom: 1px solid black;
+}
+footer > div {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+
+    h3  {
+        font-size: 1em;
+    }
+    p {
+        font-size: .8em;
+    }
+}
