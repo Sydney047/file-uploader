@@ -285,3 +285,11 @@ exports.downloadFile = async ( req, res ) => {
 
     res.redirect( downloadurl );
 }
+exports.searchInFolder = async ( req, res ) => {
+    const { userId, folderId } = req.params;
+    const { query } = req.query;  
+
+    const folder = await db.getFolder( +userId, +folderId );
+    const files = await db.searchFilesInFolder( +folderId, query );
+    res.render( 'files', { title: 'Files', user: req.user, folder, files } );
+}  

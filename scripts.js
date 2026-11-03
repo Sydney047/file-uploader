@@ -244,8 +244,7 @@ const createNewFile = async ( folderId, filename, fileSize, fileMimetype, filePa
             publicId, 
         },
        }) ;
-       console.log( 'File Created' )
-       console.log( file )
+       console.log( 'File Created' );
     } catch (error) {
         console.log( error );
     } finally {
@@ -265,7 +264,6 @@ const updateShowFileDetails = async ( folderId, fileId ) => {
             },
         }); 
 
-        console.log( updatedfile );
     } catch (error) {
         console.log( error );
     } finally {
@@ -285,7 +283,6 @@ const updateHideFileDetails = async ( folderId, fileId ) => {
             },
         }); 
 
-        console.log( updatedfile );
     } catch (error) {
         console.log( error );
     } finally {
@@ -310,8 +307,28 @@ const getFile = async ( folderId, fileId ) => {
     }
 }
 
+const searchFilesInFolder = async ( folderId, query ) => {
+    try {
+        const files = await prisma.file.findMany({
+            where: {
+                folderId,
+                name: {
+                    contains: query,
+                    mode: 'insensitive',
+                },
+            },
+        });
+
+        return files;
+    } catch (error) {
+        console.log( error );
+    } finally {
+        await prisma.$disconnect();
+    }
+}
+
 module.exports = { 
     createUser, getUserByUsername, getUserById, getUserFoldersById, createNewFolder,deleteFolder,
     updateFolderEdit, updateFolderName, getFolder, createNewFile, updateShowFileDetails,
-    updateHideFileDetails, getFile, addFolderToFavourites, removeFolderFromFavourites, getFiles
+    updateHideFileDetails, getFile, addFolderToFavourites, removeFolderFromFavourites, getFiles, searchFilesInFolder
 };

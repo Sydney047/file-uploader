@@ -22,5 +22,6 @@ router.post( '/:userId/:folderId/addNewFile', controller.addNewFile );
 router.get( '/:userId/:folderId/:fileId/showFileDetails', controller.showFileDetails );
 router.get( '/:userId/:folderId/:fileId/hideFileDetails', controller.hideFileDetails );
 router.get( '/:userId/:folderId/:fileId/downloadFile', controller.downloadFile );
+router.get( '/:userId/:folderId/searchInFolder', controller.searchInFolder );
 
 module.exports =router;
