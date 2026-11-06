@@ -235,14 +235,17 @@ exports.addNewFile = ( req, res ) => {
         const { userId, folderId } = req.params;
         const { folderName } = req.query;
         const file = req.file;
-        console.log( file )
+
+        if ( !file ) {
+            return res.status( 400 ).redirect( `/${ userId }/${ folderId }/files?error=No file selected` );
+        }
 
         try {
-            const uploadedFile = await cloudinary.uploader.upload( file?.path, { folder: folderName } );
+            const uploadedFile = await cloudinary.uploader.upload( file?.path, { folder: folderName, resource_type: 'raw' } );
 
             await db.createNewFile( +folderId, file.filename, file.size, file.mimetype, uploadedFile.secure_url, uploadedFile.public_id );
         } catch (error) {
-            console.log( 'Uploading error:' + error.message )
+            console.log( 'Uploading error:' + error.message );
             return res.redirect( `/${ userId }/${ folderId }/files?error=${ error.message } ` );
         } finally {
             fs.unlink( file?.path, err => {

@@ -49,8 +49,14 @@
                                 <div class="fileNameField">
                                     <div class="fileImage">
                                         <img alt="<%= file.name.split( '-' )[0] %>"
-                                            src="<%= file.mimetype.split('/')[1] === 'pdf' ? '/pdf-file-svgrepo-com.svg' :
-                                                '/picture-svgrepo-com.svg' %>" >
+                                            src="<%= file.mimetype.split('/')[1] === 'pdf' ? '/pdf.svg' :
+                                                file.mimetype.split('/')[1] === 'vnd.openxmlformats-officedocument.wordprocessingml.document' ? '/word.svg' :
+                                                file.mimetype.split('/')[1] === 'vnd.openxmlformats-officedocument.presentationml.presentation' ? '/ppt.svg' :  
+                                                file.mimetype.split('/')[1] === 'vnd.openxmlformats-officedocument.spreadsheetml.sheet' ? '/excel.svg' :           
+                                                file.mimetype.split('/')[1] === 'zip' ? '/zip.svg' :   
+                                                file.mimetype.split('/')[0] === 'image' ? '/image.svg' :
+                                                file.mimetype.split('/')[0] === 'audio' ? '/audio.svg' :
+                                                '/file-default.svg' %>" >
                                         <span><strong><%= file.name.split( '-' )[0] %></strong>.<%= file.name.split( '.' )[1] %></span>
                                     </div>
                                     <% if ( !file.details ) { %>

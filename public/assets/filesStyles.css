@@ -200,6 +200,11 @@
             align-items: center;
             margin-top: 2rem;
 
+            span {
+                color: red;
+                position: relative;
+                bottom: 1rem;
+            }
             label {
                 display: flex;
                 flex-direction: column;
@@ -368,6 +373,7 @@
         grid-template: 1fr / repeat( 3, 1fr );
         gap: 1rem;
         justify-items: center;
+        margin-top: 2rem;
 
         li { 
             display: grid;
@@ -380,6 +386,10 @@
             background-color: var( --secondary-bg-color );
             box-shadow: var( --box-shadow );
 
+            &:hover {
+                box-shadow: var( --hover-box-shadow );
+                transform: scale( 1.005 );
+            }   
             .fileNameField {
                     display: flex;
                     flex-direction: column;

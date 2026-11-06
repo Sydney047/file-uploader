@@ -22,6 +22,9 @@
     <% if ( locals.files?.length > 0 ) { %>
         <div>
             <form class="searchForm" action="/<%= locals.user.id %>/<%= locals.folder.id %>/searchInFolder" method="get">
+                <% if ( locals.error ) { %>
+                    <span class="error"><%= locals.error %></span>
+                <% } %>
                 <input type="text" name="query" placeholder="Search files..." id="folderSearchInput" 
                     data-user="<%= locals.user.id %>" data-folder="<%= locals.folder.id %>">
             </form>
