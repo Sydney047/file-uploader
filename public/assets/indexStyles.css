@@ -18,7 +18,6 @@
 .indexContainer {
     display: grid;
     grid-template:  7ch 1fr 25ch / 1fr;
-    /* gap: 2rem; */
 }
 nav {
     display: flex;
@@ -28,6 +27,7 @@ nav {
     border-bottom: 5px solid var( --outline-color );
     align-items: center;
     background-color: var( --secondary-bg-color );
+    width: 100%;
 }
 .loggedOutLandingPage {
     display: grid;
@@ -142,7 +142,7 @@ nav {
 .loggedInLandingPage {
     display: flex;
     height: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 .loggedInLandingPage > aside {
     display: flex;
@@ -232,6 +232,9 @@ nav {
         align-items: center;
         margin-top: 1rem;
 
+        .welcomeMessageMobile {
+            display: none;
+        }
         .emptyFolder {
             width: 100%;
             height: 30vh;
@@ -282,7 +285,6 @@ nav {
         ul {
             display: grid;
             grid-template: 1fr / repeat( 3, 1fr );
-            gap: 2rem;
             gap: 5ch;
             
             li  {        
@@ -293,7 +295,7 @@ nav {
                 display: grid;
                 grid-template: 3fr 1fr / 1fr ;
                 height: 150px;
-                width: clamp(  250px, 20vw, 350px);
+                width: clamp(  300px, 23vw, 400px);
                 /* border: 1px solid black; */
                 padding: 10px;
                 background-color: var( --secondary-bg-color );
@@ -462,5 +464,127 @@ footer > div {
     }
     p {
         font-size: .8em;
+    }
+}
+
+@media screen and ( width <= 600px ) {
+
+    .indexContainer {
+        grid-template:  10ch 1fr/ 1fr;
+        width: 100%;
+
+        nav{
+            width: 93%;
+        }
+        .loggedOutLandingPage {
+            width: 100%;
+            grid-template-columns: 1fr;
+
+            main {
+                display: flex;      
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                gap: 0rem;
+                
+                h1 {
+                    font-size: 1.5rem;
+                }
+                p, button  {
+                    position: relative;
+                    left: 1ch;
+                    }
+            }
+            aside {
+                display: none;
+            }   
+        }
+        .loggedInLandingPage {
+            display: flex;
+            flex-direction: column-reverse;
+            position: relative;
+
+            aside {
+                align-content: center;
+                justify-content: center;
+                min-height: 80px;
+                max-width: 100vw;
+                border-radius: 16px;
+                position: sticky;
+                bottom: 0;
+                z-index: 3;
+
+                h2, button:last-child {
+                    display: none;
+                }
+                button {
+                    width: 70px;
+                    height: 4ch;
+                    padding: .2rem;
+                    border: none;
+                    position: relative;
+                    bottom: -0.5ch;
+
+                    a {
+
+                        svg {
+                            height: 4ch;
+                            width: 5ch;
+                            position: relative;
+                            bottom: 1.5px;
+                        }
+                    }
+                }
+                .active {
+                    width: 100px;
+                    height: 6ch;
+                }
+                .active::before {
+                    width: 100%;
+                    height: 7ch;
+                }
+            }
+            main {
+                div {
+                    .welcomeMessageMobile {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        width: 100%;
+                        padding-left: 1rem;
+                        gap: 0;
+
+                        span {
+                            font-size: 2rem;
+                            font-weight: 600;
+                        }
+                    }
+                    ul {
+                        grid-template: 1fr / repeat( 1, 1fr );  
+                        gap: 24px;
+
+                        li {
+                            left: -2.5ch;
+                            max-width: 350px;
+
+                            .folderModifies {
+                                span, button, a {
+                                    width: 50px;
+                                }
+                            }
+                        }
+                    }
+                    form {
+                        label {
+                            width: 350px;
+                        }
+                    }
+                }
+            }
+        }
+        footer {
+            display: none;
+        }
     }
 }

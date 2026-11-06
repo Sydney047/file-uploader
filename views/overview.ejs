@@ -2,6 +2,10 @@
     <% if ( locals.folders?.length === 0 ) { %>
         <%- include( 'emptyDashboard' ) %>
     <% } else { %>
+        <div class="welcomeMessageMobile">
+            <span>Hi, <%= user.username %> 👋</span>
+            <p>Manage your files with ease</p>
+        </div>
         <form action="/<%= user.id %>/create-folder" method="post" onsubmit="e.preventDefault();">
             <% if ( locals.errors && locals.errors.length > 0 ) { %>
                 <ul class="errorMessages">

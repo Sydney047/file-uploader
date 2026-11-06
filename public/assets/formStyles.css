@@ -163,3 +163,20 @@ footer > div {
         font-size: .8em;
     }
 }
+
+@media screen and (max-width: 600px)  {
+    main {
+        div {
+            button {
+                height: 5ch;
+                padding: .7rem;
+            }
+        }
+        form {
+            button {
+                height: 5ch;
+                padding: .7rem;
+            }
+        }
+    }
+}
