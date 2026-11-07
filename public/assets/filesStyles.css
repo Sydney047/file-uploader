@@ -38,8 +38,8 @@
         box-shadow: var( --folder-nav-shadow );
         max-width: 15vw;
         min-width: 10vw;
-
-        button {
+}
+.subContainer > aside > button {
             width: 70%;
             height: 5ch;
             padding: .2rem;
@@ -52,8 +52,8 @@
             position: sticky;
             top: 2rem;
             left: 0;
-
-            a {
+}
+.subContainer > aside > button > a {
                 width: 100%;
                 height: 100%;
                 display: flex;
@@ -62,35 +62,31 @@
                 text-decoration: none;
                 font-weight: 600;
                 color: var( --btn-color );
-
-                svg {
+}
+.subContainer > aside > button > a > svg {
                     height: 3ch;
                     width: 4ch;
                     position: relative;
-                    /* bottom: 3.5px; */
-                }
-            }
-        }
-        button:hover {
+}
+.subContainer > aside > button:hover {
             box-shadow: var( --box-shadow );
             outline: none;
             transform: scale( 1.1 );
-        }
-        div {
+}
+.subContainer > aside > div {
             width: 50%;
             align-self: center;
-            svg {
+}
+.subContainer > aside > div > svg {
                 width: 100%;
-            }
-        }
-        span {
+}
+.subContainer > aside > span {
             align-self: center;
             position: relative;
             bottom: 6ch;
-            strong {
+}            
+.subContainer > aside > span > strong {
                 font-size: 1.6rem;
-            }
-        }
 }
 
 .subContainer > main {
@@ -100,8 +96,8 @@
     width: 100%;
     height: 100%;
     justify-content: flex-start;
-
-    nav {
+}
+.subContainer > main > nav {
         display: flex;
         flex-wrap: wrap;
         width: 95%;
@@ -110,51 +106,46 @@
         justify-content: flex-start;
         padding-left: 2rem;
         margin-bottom: 1rem;
-
-        div {
+}
+.subContainer > main > nav > div {
             display: flex;
             align-items: center;
             gap: .5rem;
             width: 100%;
-
-            svg {
+}
+.subContainer > main > nav > div > svg {
                 width: 2ch;
                 height: 2.5ch;
-            }
-            span {
-                strong {
+}
+.subContainer > main > nav > div > span > strong {
                     font-size: 1.3rem;
-                }
-            }
-            .newFileForm {
+}
+.subContainer > main > nav > div > .newFileForm {
                 margin-left: auto;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
-
-                input {
+}
+.subContainer > main > nav > div > .newFileForm > input {
                     position: relative;
                     top: 1ch;                   
                     padding: .5rem 1rem;
                     border-radius: .4rem;
                     height: 3.5ch;
-                }
-                input::file-selector-button {
-                    border-radius: .4rem 0 0 .4rem;           
-                    /* background-color: var( --main-bg-color ); */
-                    /* outline: 2px solid var( --btn-color ); */
-                    /* border: none; */
+}
+.subContainer > main > nav > div > .newFileForm > input::file-selector-button {
+                    border-radius: .4rem 0 0 .4rem;
                     transition: all 250ms ease;
                     height: 3.5ch;
-                }
-                input::file-selector-button:hover {
+}
+.subContainer > main > nav > div > .newFileForm > input::file-selector-button:hover {
                     box-shadow: var( --box-shadow );
                     outline: none;
                     transform: scale( 1.1 );
                     cursor: pointer;
-                }
-                button {
+}
+.subContainer > main > nav > div > .newFileForm > button {
                     display: flex;
                     flex-direction: row;
                     gap: .5rem;
@@ -166,22 +157,20 @@
                     border: none;                   
                     padding: 1rem 1.3rem;
                     border-radius: 8px;
-                }
-            }
-        }
-        div:nth-child( 2 ) {
+}
+.subContainer > main > nav > div:nth-child( 2 ) {
             width: 100%;
             display: flex;  
             align-items: center;
             padding-right: 5rem;
-
-            form {
+}
+.subContainer > main > nav > div:nth-child( 2 ) > form {
                 display: flex;
                 align-items: flex-end;
                 justify-content: center;
                 width: 100%;
-
-                input {
+}
+.subContainer > main > nav > div:nth-child( 2 ) > form > input {
                     padding: .2rem .5rem;
                     border-radius: .4rem;           
                     background-color: var( --main-bg-color );
@@ -189,26 +178,23 @@
                     border: none;
                     transition: all 250ms ease;
                     width: 40%;
-                }
-            }
-        }
-        .backBtn {
+}
+.subContainer > main > nav > .backBtn {
             display: none;
-        }
-    }
-    form {
+}
+.subContainer > main > nav > form {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             margin-top: 2rem;
-
-            span {
+}
+.subContainer > main > nav > form > span {
                 color: red;
                 position: relative;
                 bottom: 1rem;
-            }
-            label {
+}
+.subContainer > main > nav > form > label {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -216,11 +202,11 @@
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
-
-                input[type="file"] {
+}
+.subContainer > main > nav > form > label > input[type="file"] {
                     display: none;
-                }
-                .uploadFileDiv {
+}
+.subContainer > main > nav > form > label > .uploadFileDiv {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -230,8 +216,8 @@
                     border: 2px dashed var( --btn-color );
                     border-radius: .4rem;
                     padding: 1rem;
-
-                    .uploadSvg {
+}
+.subContainer > main > nav > form > label > .uploadFileDiv > .uploadSvg {
                         width: 15ch;
                         height: 15ch;
                         background-image: url( "/upload.svg" );
@@ -239,69 +225,63 @@
                         background-position: center;
                         background-repeat: no-repeat;
                         margin-bottom: 1rem;
-                    }
-                    .uploadText {
+}
+.subContainer > main > nav > form > label > .uploadFileDiv > .uploadText {
                         font-size: 1.3rem;
                         font-weight: 600;
                         color: var( --btn-color );
-                    }
-                    span {
+}
+.subContainer > main > nav > form > label > .uploadFileDiv > span {
                         font-size: 1rem;
-                        color: var( --btn-color );
-                    }
-                }  
-            }
-            .fileNameField {
+                        color: var( --btn-color ); 
+}
+.subContainer > main > nav > form > .fileNameField {
                 margin-top: 1rem;
                 font-size: 1rem;
                 font-weight: 600;
                 color: var( --btn-color );
-            }
-
-            button {
+}
+.subContainer > main > nav > form > button {
                 display: flex;
-                    flex-direction: row;
-                    gap: .5rem;
-                    height: 3.5ch;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #D98327;
-                    color: var( --secondary-bg-color );
-                    outline: none;                   
-                    padding: 1.3rem 1.3rem;
-
-                &:hover {
+                flex-direction: row;
+                gap: .5rem;
+                height: 3.5ch;
+                justify-content: center;
+                align-items: center;
+                background-color: #D98327;
+                color: var( --secondary-bg-color );
+                outline: none;                   
+                padding: 1.3rem 1.3rem;
+}
+.subContainer > main > nav > form > button:hover {
                     box-shadow: var( --box-shadow );
                     outline: none;
                     transform: scale( 1.1 );
                     cursor: pointer;
-                }
-                svg {
+}
+.subContainer > main > nav > form > svg {
                     height: 2.5ch;
                     width: 2.5ch;
-                }
-            }
-        }
-    }
-    .emptyFiles {
+}
+.subContainer > main > .emptyFiles {
         margin-top: 2rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-        span {
+}
+.subContainer > main > .emptyFiles > span {
             font-size: 2.5rem;
             font-weight: 600;
-        }
-        form {
+}
+.subContainer > main > .emptyFiles > form {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             margin-top: 2rem;
-
-            label {
+}
+.subContainer > main > .emptyFiles > form > label {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -309,11 +289,11 @@
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
-
-                input[type="file"] {
+}
+.subContainer > main > .emptyFiles > form > label > input[type="file"] {
                     display: none;
-                }
-                .uploadFileDiv {
+}
+.subContainer > main > .emptyFiles > form > label > .uploadFileDiv {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -323,8 +303,8 @@
                     border: 2px dashed var( --btn-color );
                     border-radius: .4rem;
                     padding: 1rem;
-
-                    .uploadSvg {
+}
+.subContainer > main > .emptyFiles > form > label > .uploadFileDiv > .uploadSvg {
                         width: 15ch;
                         height: 15ch;
                         background-image: url( "/upload.svg" );
@@ -332,26 +312,23 @@
                         background-position: center;
                         background-repeat: no-repeat;
                         margin-bottom: 1rem;
-                    }
-                    .uploadText {
+}
+.subContainer > main > .emptyFiles > form > label > .uploadFileDiv > .uploadText {
                         font-size: 1.3rem;
                         font-weight: 600;
                         color: var( --btn-color );
-                    }
-                    span {
+}
+.subContainer > main > .emptyFiles > form > label > .uploadFileDiv > span {
                         font-size: 1rem;
-                        color: var( --btn-color );
-                    }
-                }  
-            }
-            .fileNameField {
+                        color: var( --btn-color ); 
+}
+.subContainer > main > .emptyFiles > form > .fileNameField {
                 margin-top: 1rem;
                 font-size: 1rem;
                 font-weight: 600;
                 color: var( --btn-color );
-            }
-
-            .uploadBtn {
+}
+.subContainer > main > .emptyFiles > form > .uploadBtn {
                 margin-top: 1rem;
                 padding: 1rem 2rem;
                 border-radius: .4rem;           
@@ -359,26 +336,22 @@
                 /* outline: 2px solid var( --btn-color ); */
                 border: none;
                 transition: all 250ms ease;
-
-                &:hover {
+}
+.subContainer > main > .emptyFiles > form > .uploadBtn:hover {
                     box-shadow: var( --box-shadow );
                     outline: none;
                     transform: scale( 1.1 );
                     cursor: pointer;
-                }
-            }
-        }
-
-    }
-    ul {
+}
+.subContainer > main > ul {
         display: grid;
         width: 98%;
         grid-template: 1fr / repeat( 3, 1fr );
         gap: 1rem;
         justify-items: center;
         margin-top: 2rem;
-
-        li { 
+}
+.subContainer > main > ul > li { 
             display: grid;
             border: none;
             border-radius: 16px;
@@ -388,16 +361,16 @@
             padding: 10px;
             background-color: var( --secondary-bg-color );
             box-shadow: var( --box-shadow );
-
-            &:hover {
+}
+.subContainer > main > ul > li:hover {
                 box-shadow: var( --hover-box-shadow );
                 transform: scale( 1.005 );
-            }   
-            .fileNameField {
+}   
+.subContainer > main > ul > li > .fileNameField {
                     display: flex;
                     flex-direction: column;
-
-                    .fileImage {
+}
+.subContainer > main > ul > li > .fileNameField > .fileImage {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
@@ -405,15 +378,14 @@
                         width: 100%;
                         height: 100px;
                         gap: .5rem;
-
-                        img {
+}
+.subContainer > main > ul > li > .fileNameField > .fileImage > img {
                             align-self: center;
                             max-width: 100%;
                             max-height: 70%;
                             object-fit: contain;
-                        }
-                    }   
-                    .fileControls {
+}   
+.subContainer > main > ul > li > .fileNameField > .fileControls {
                         display: flex;
                         flex-direction: row;
                         align-items: center;
@@ -421,35 +393,31 @@
                         height: 50px;
                         margin-top: .5rem;
                         border-top: 1px solid var( --border-color );
-
-                        button {
+}
+.subContainer > main > ul > li > .fileNameField > .fileControls > button {
                             background-color: transparent;
                             border: none;
-
-                            &:hover {
-                                cursor: pointer;
-                            }   
-                            svg {
+}
+.subContainer > main > ul > li > .fileNameField > .fileControls > button:hover {
+                            cursor: pointer;
+}   
+.subContainer > main > ul > li > .fileNameField > .fileControls > button > svg {
                                 width: 3ch;
                                 height: 3.5ch;
-                            }
-                        }
-                        a {
+}
+.subContainer > main > ul > li > .fileNameField > .fileControls > a {
                             text-decoration: none;
                             color: var( --btn-color );
                             font-weight: 600;
-
-                            svg {
+}
+.subContainer > main > ul > li > .fileNameField > .fileControls > a > svg {
                                 width: 3ch;
                                 height: 3.5ch;
-                            }
-                        }
-                        a:last-child {
+}
+.subContainer > main > ul > li > .fileNameField > .fileControls > a:last-child {
                             margin-left: auto;
-                        }
-                    }
-            }
-            .fileDetailsDiv {
+}
+.subContainer > main > ul > li > .fileDetailsDiv {
                 display: flex;
                 flex-wrap: wrap;
                 position: relative;
@@ -457,38 +425,30 @@
                 height: 100%;
                 gap: 0 2rem;              
                 border-top: 1px solid var( --border-color );
-
-                p {
+}
+.subContainer > main > ul > li > .fileDetailsDiv > p {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     gap: .5rem; 
-
-                    svg {
+}
+.subContainer > main > ul > li > .fileDetailsDiv > p > svg {
                         width: 3ch;
                         height: 3.5ch;
-                    }
-                }   
-                p:first-child {
-                    svg {
+}   
+.subContainer > main > ul > li > .fileDetailsDiv > p:first-child > svg {
                         width: 2ch;
                         height: 3ch;
-                    }
-                }   
-                a:last-child{
+}   
+.subContainer > main > ul > li > .fileDetailsDiv > a:last-child {
                     position: absolute;
                     top: 0;
                     right: 0;
-
-                    svg {
+}
+.subContainer > main > ul > li > .fileDetailsDiv > a:last-child > svg {
                         width: 4ch;
-                        height: 4ch;
-                    }
-                }          
-            }
-        }
-        
-    }
+                        height: 4ch;  
+}
 
 
 footer {
@@ -509,13 +469,12 @@ footer > div {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
-
-    h3  {
+}
+footer > div > h3  {
         font-size: 1em;
-    }
-    p {
+}
+footer > div > p {
         font-size: .8em;
-    }
 }
 
 @media screen and ( max-width : 600px ) {
@@ -524,42 +483,40 @@ footer > div {
     }
     .subContainer {
         width: 100%;
-
-        aside {
+    }
+    .subContainer > aside {
             display: none;
-        }
-        main {
+    }
+    .subContainer > main {
             width: 100%;
-            nav {
+    }
+    .subContainer > main > nav {
                 margin-bottom: 0;
                 padding: 3ch 0;
                 height: 210px;
                 width: 100%;
-
-                div  {
+    }
+    .subContainer > main > nav > div  {
                     flex-wrap: wrap;
                     gap: 0;
                     /* padding: 3ch 0; */
                     width: 100%;
-
-                    form {
+    }
+    .subContainer > main > nav > div > form {
                         width: 100%;
-                    }
-                }
-                div:nth-child( 2 ) {
+    }
+    .subContainer > main > nav > div:nth-child( 2 ) {
                     width: 100%;
                     margin-bottom: 1.5ch;
-
-                    form {
+    }
+    .subContainer > main > nav > div:nth-child( 2 ) > form {
                         width: 100%;
-
-                        input {
+    }
+    .subContainer > main > nav > div:nth-child( 2 ) > form > input {
                             width: 70%;
                             height: 3ch;
-                        }
-                    }
-                }
-                .backBtn {
+    }
+    .subContainer > main > nav > .backBtn {
                     display: inline;
                     width: 100px;
                     height: 5ch;
@@ -573,8 +530,8 @@ footer > div {
                     top: 2rem;
                     left: 0;
                     font-size: 1.1rem;
-
-                    a {
+    }
+    .subContainer > main > nav > .backBtn > a {
                         width: 100%;
                         height: 100%;
                         display: flex;
@@ -582,35 +539,24 @@ footer > div {
                         justify-content: center;
                         text-decoration: none;
                         font-weight: 600;
-
-                        svg {
+    }
+    .subContainer > main > nav > .backBtn > a > svg {
                             height: 3ch;
                             width: 4ch;
                             position: relative;
-                            /* bottom: 3.5px; */
-                        }
-                    }
-                }
-            }
-            ul {
+    }
+    .subContainer > main > ul {
                 grid-template: 1fr / repeat( 1, 1fr );  
                 gap: 24px;
                 width: 100%;
-
-                li {
+    }
+    .subContainer > main > ul > li {
                     width: 300px;
                     position: relative;
                     right: 2ch;
-
-                    .fileNameField {
-                        .fileControls {
-                            button, a {
+    }
+    .subContainer > main > ul > li > .fileNameField > .fileControls > button, 
+    .subContainer > main > ul > li > .fileNameField > .fileControls > a {
                                 width: 50px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 }

@@ -43,10 +43,11 @@ nav {
 }
 .loggedOutLandingPage > main {
     grid-area: main;
-    h1 {
-        font-size: 3rem;
-    }
-    button {
+}
+.loggedOutLandingPage > main > h1 {
+    font-size: 3rem;
+}
+.loggedOutLandingPage > main > button {
         width: 45%;
         padding: .6rem;
         border-radius: 1rem;
@@ -55,8 +56,15 @@ nav {
         height: 5ch;
         text-align: center;
         background-color: var( --btn-bg );
-
-        a {
+}
+.loggedOutLandingPage > main > button:hover {
+        cursor: pointer;
+        box-shadow: var( --button-hover );
+}
+.loggedOutLandingPage > main > button:active {
+        outline: 2px solid aquamarine;
+}
+.loggedOutLandingPage > main > button > a {
             width: 100%;
             height: 100%;
             text-decoration: none;
@@ -67,30 +75,21 @@ nav {
             display: flex;
             align-items: center;
             justify-content: center;
-
-            svg {
+}
+.loggedOutLandingPage > main > button > a > svg {
                 height: 3ch;
                 width: 4ch;
-                /* margin-right: 4ch; */
-            }
-        }
-    }
-    button:hover {
-        cursor: pointer;
-        box-shadow: var( --button-hover );
-    }
-    button:active {
-        outline: 2px solid aquamarine;
-    }
-    button, p {
+}
+.loggedOutLandingPage > main > button,
+.loggedOutLandingPage > main >  p {
         position: relative;
         left: 4ch;
-    }
 }
 
 .loggedOutLandingPage > aside {
     grid-area: aside;
-    form {
+}
+.loggedOutLandingPage > aside > form {
         display: grid;
         grid-template: 7ch 7ch 10ch 4ch / 1fr;
         gap: 1ch;
@@ -100,24 +99,25 @@ nav {
         padding: 40px;
         box-shadow: var( --box-shadow );
         background-color: var( --secondary-bg-color  );
-
-        input, textarea {
+}
+.loggedOutLandingPage > aside > form > input,
+.loggedOutLandingPage > aside > form > textarea {
             width: 100%;
             height: 3ch;
             border: none;
             border-radius: 5px;
             border-bottom: 2px solid var( --btn-color );
             background-color: var( --secondary-bg-color );
-        }
-        textarea {
+}
+.loggedOutLandingPage > aside > form > textarea {
             height: 50px;
             /* text-align: end; */
-        }
-        textarea::placeholder {
+}
+.loggedOutLandingPage > aside > form > textarea::placeholder {
             position: relative;
             top: 2ch;
-        }
-        button {
+}
+.loggedOutLandingPage > aside > form > button {
             width: 70%;
             padding: .2rem;
             border-radius: .8rem;
@@ -128,15 +128,13 @@ nav {
             background-color: var( --btn-bg );
             position: relative;
             top: 1ch;
-        }
-        button:hover {
+}
+.loggedOutLandingPage > aside > form > button:hover {
             cursor: pointer;
             box-shadow: var( --button-hover );
-        }
-        button:active {
+}
+.loggedOutLandingPage > aside > form button:active {
             outline: 2px solid aquamarine;
-        }
-    }
 }
 
 .loggedInLandingPage {
@@ -154,8 +152,8 @@ nav {
     min-height: 400px;
     box-shadow: var( --folder-nav-shadow );
     max-width: 15vw;
-
-    button {
+}
+.loggedInLandingPage > aside > button {
         width: 70%;
         height: 4ch;
         padding: .2rem;
@@ -165,31 +163,15 @@ nav {
         position: relative;
         bottom: -0.5ch;
         z-index: 2;
-
-        a {
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
-            display: inline-block;
-            color: var( --btn-color );
-            z-index: 2;
-            font-weight: 600;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-
-            svg {
-                height: 3ch;
-                width: 4ch;
-                position: relative;
-                bottom: 3.5px;
-            }
-        }
-    }
-    .active:hover {
+}
+.loggedInLandingPage > aside > button:hover {
+        cursor: pointer;
+        outline: 2px solid var( --btn-bg );
+}
+.loggedInLandingPage > aside > .active:hover {
         outline: none;
-    }
-    .active::before {
+}
+.loggedInLandingPage > aside > .active::before {
         content: "";
         background-color: var(  --main-bg-color );
         box-shadow: var( --box-shadow );
@@ -200,244 +182,247 @@ nav {
         bottom: 0ch;
         z-index: -1;
         border-radius: 15px;
-    }
-    button:last-child {
+}
+.loggedInLandingPage > aside > button:last-child {
         border: none;
         margin-top: 30vh;
         background-color: #680c07;
         padding: .4rem;
-        a {
+}
+.loggedInLandingPage > aside > button:last-child > a {
           color: whitesmoke;  
-        }
-    }
-    button:last-child:hover {
+}
+.loggedInLandingPage > aside > button:last-child:hover {
         box-shadow: var( --box-shadow  );
         background-color: #E11A45;
-    }
-    button:hover {
-        cursor: pointer;
-        outline: 2px solid var( --btn-bg );
-    }
+}
+.loggedInLandingPage > aside > button > a {
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            display: inline-block;
+            color: var( --btn-color );
+            z-index: 2;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+}
+.loggedInLandingPage > aside > button > a > svg {
+                height: 3ch;
+                width: 4ch;
+                position: relative;
+                bottom: 3.5px;
 }
 .loggedInLandingPage > main {
     display: flex;
     width: 100%;
     height: 100%;
     justify-content: center;
-
-    div {
+}
+.loggedInLandingPage > main > div {
         display: flex;
         flex-direction: column;
         gap: 1rem;
         align-items: center;
         margin-top: 1rem;
-
-        .welcomeMessageMobile {
+}
+.loggedInLandingPage > main > div > .welcomeMessageMobile {
             display: none;
-        }
-        .emptyFolder {
+}
+.loggedInLandingPage > main > div > .emptyFolder {
             width: 100%;
-            height: 30vh;
+            height: 40vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-
-            div {
-                height: 20vh;
+}
+.loggedInLandingPage > main > div > .emptyFolder > div {
+                height: 30vh;
                 width: 100%;
-            }
-        }
-        form {
+}
+.loggedInLandingPage > main > div > .emptyFolder > div > svg {
+                    width: 100%;
+                    height: 100%;
+}
+.loggedInLandingPage > main > div > .emptyFolder > form {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-
-            .errorMessages {
+}
+.loggedInLandingPage > main > div > .emptyFolder > p {
+    font-size: .8rem;
+    position: relative;
+    bottom: 1rem;
+}
+.loggedInLandingPage > main > div > form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+}
+.loggedInLandingPage > main > div > form > .errorMessages {
                 display: flex;
-            }
-            label {
+}
+.loggedInLandingPage > main > div > form > label,
+.loggedInLandingPage > main > div > .emptyFolder > form > label {
                 width: 400px;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-
-                input {
+}
+.loggedInLandingPage > main > div > form > label > input,
+.loggedInLandingPage > main > div > .emptyFolder > form > label > input {
                     height: 3ch;
                     width: 100%;
                     height: 4ch;
                     border-radius: 12px;
                     border: 2px solid black;
                     text-align: center;
-                }
-            }
-            button {           
+}
+.loggedInLandingPage > main > div > form > button {           
                 border-radius: 0 12px 12px 0;
                 height: 4ch;
-            }
-        }
-        h2 {
+}
+.loggedInLandingPage > main > div > h2 {
             align-self: flex-start;
             position: relative;
             left: 6ch;
             margin-bottom: 0;
-        }
-        ul {
+}
+.loggedInLandingPage > main > div > ul {
             display: grid;
             grid-template: 1fr / repeat( 3, 1fr );
             gap: 5ch;
-            
-            li  {        
+}           
+.loggedInLandingPage > main > div > ul > li  {        
                 position: relative;  
                 border: none;
                 border-radius: 16px;
                 list-style-type: none;
                 display: grid;
-                grid-template: 3fr 1fr / 1fr ;
+                grid-template: 2fr 1fr / 1fr ;
                 height: 150px;
                 width: clamp(  300px, 23vw, 400px);
-                /* border: 1px solid black; */
                 padding: 10px;
                 background-color: var( --secondary-bg-color );
                 box-shadow: var( --box-shadow );
-
-                .folderDetails {
+}
+.loggedInLandingPage > main > div > ul > li > .folderDetails {
                     position: relative;
-                    /* bottom: 2ch; */
                     display: flex;
                     flex-direction: row;
                     flex-wrap: wrap;
                     align-items: center;
                     width: 100%;
-                    /* height: 100%; */
                     border-bottom: 1px solid black;
-
-                    span {
-                        height: 60%;
+                    padding-top: 3ch;
+}
+.loggedInLandingPage > main > div > ul > li > .folderDetails span {
+                        height: 70%;
                         width: 20%;
                         background-image: url( "./closed-folder.svg" );
                         background-position: center;
                         background-size: contain;
                         background-repeat: no-repeat;
-                    }
-                    .folderName {
+}
+.loggedInLandingPage > main > div > ul > li > .folderDetails > .folderName {
                         font-size: 1.3rem;
                         font-weight: 600;
                         position: relative;
-                        right: 1ch;
-                    }
-                    .favourite {
+                        right: 0ch;
+}
+.loggedInLandingPage > main > div > ul > li > .folderDetails > .favourite {
                         background-color: #15370D;
                         color: #76C457;
                         border: none;
                         border-radius: 8px;
                         padding: 1px 3px;
                         margin-left: auto;
-                    }
-                    span, .favourite, .folderName {
-
+}
+.loggedInLandingPage > main > div > ul > li > .folderDetails > span, 
+.loggedInLandingPage > main > div > ul > li > .folderDetails > .favourite, 
+.loggedInLandingPage > main > div > ul > li > .folderDetails > .folderName {
                         position: relative;
                         bottom: 2ch;
-                    }
-                    p:last-child {
+}
+.loggedInLandingPage > main > div > ul > li > .folderDetails > p:last-child {
                         position: absolute;
-                        bottom: 0ch;
-                        left: 2ch;
-                    }
-                }
-                .folderModifies {
+                        bottom: 1.5ch;
+                        left: 9ch;
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies {
                     position: relative;
-                    /* bottom: 3ch; */
                     display: flex;
                     flex-direction: row;
                     flex-wrap: wrap;
                     width: 100%;
                     align-items: center;
                     justify-content: center;
-
-                    form {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > form {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
-
-                        ul {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > form > ul {
                             color: red;
-                        }
-                        label {
-                            input {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > form > label > input {
                                 height: 3ch;
                                 width: 100%;
                                 height: 4ch;
                                 border-radius: 12px;
                                 border: 2px solid black;
                                 text-align: center;
-                            }
-                        }
-                    }
-                    span {
-                        a {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > span > a {
                             text-decoration: none;
                             position: relative;
-
-                            svg {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > span > a svg {
                                 height: 3ch;
                                 width: 4ch;
                                 position: relative;
-                                /* bottom: 3.5px; */
-                            }
-                        }
-                    }
-                    button {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > button {
                         border: none;
                         border-radius: 12px;
                         /* border: 1px solid black; */
                         background-color: transparent;
                         padding: 0;
-
-                        a  {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > button > a  {
                             text-decoration: none;
-
-                            svg {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > button > a > svg {
                                 height: 3ch;
                                 width: 4ch;
                                 position: relative;
-                                /* bottom: -15px; */
-                            }
-                        }
-                    }
-                    button:hover {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > button:hover {
                         cursor: pointer;
-                    }
-                    .shareBtn {
-                        svg {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > .shareBtn > svg {
                             height: 3ch;
                             width: 4ch;
                             position: relative;
-                            /* bottom: -15px; */
-                        }
-                    }
-                    .renameBtn {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > .renameBtn {
                         margin-left: auto;
-                    }
-                    a {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > a {
                         text-decoration: none;
                         position: relative;
-
-                        svg {
+}
+.loggedInLandingPage > main > div > ul > li > .folderModifies > a > svg {
                             height: 2ch;
                             width: 3ch;
                             position: relative;
-                            /* bottom: 3.5px; */
-                        }
-                    }
-                }
-            }
-            li:hover {
-                box-shadow: var( --hover-box-shadow );
-            }
-        }
-    }
-    
+}
+.loggedInLandingPage > main > div > ul > li:hover {
+                box-shadow: var( --hover-box-shadow );  
 }
 
 footer {
@@ -458,13 +443,12 @@ footer > div {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
-
-    h3  {
+}
+footer > div > h3  {
         font-size: 1em;
-    }
-    p {
+}
+footer > div > p {
         font-size: .8em;
-    }
 }
 
 @media screen and ( max-width : 600px ) {
@@ -472,40 +456,39 @@ footer > div {
     .indexContainer {
         grid-template:  10ch 1fr/ 1fr;
         width: 100%;
-
-        nav{
+    }
+    nav {
             width: 93%;
-        }
-        .loggedOutLandingPage {
+    }
+    .loggedOutLandingPage {
             width: 100%;
             grid-template-columns: 1fr;
-
-            main {
+    }
+    .loggedOutLandingPage > main {
                 display: flex;      
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 width: 100%;
                 gap: 0rem;
-                
-                h1 {
+    }           
+    .loggedOutLandingPage > main > h1 {
                     font-size: 1.5rem;
-                }
-                p, button  {
+    }
+    .loggedOutLandingPage > main > p,
+    .loggedOutLandingPage > main > button  {
                     position: relative;
                     left: 1ch;
-                    }
-            }
-            aside {
-                display: none;
-            }   
-        }
-        .loggedInLandingPage {
+    }
+    .loggedOutLandingPage > aside {
+                display: none;  
+    }
+    .loggedInLandingPage {
             display: flex;
             flex-direction: column-reverse;
             position: relative;
-
-            aside {
+    }
+    .loggedInLandingPage > aside {
                 align-content: center;
                 justify-content: center;
                 min-height: 80px;
@@ -514,77 +497,65 @@ footer > div {
                 position: sticky;
                 bottom: 0;
                 z-index: 3;
-
-                h2, button:last-child {
+    }
+    .loggedInLandingPage > aside > h2, 
+    .loggedInLandingPage > aside > button:last-child {
                     display: none;
-                }
-                button {
+    }
+    .loggedInLandingPage > aside > button {
                     width: 70px;
                     height: 4ch;
                     padding: .2rem;
                     border: none;
                     position: relative;
                     bottom: -0.5ch;
-
-                    a {
-
-                        svg {
+    }
+    .loggedInLandingPage > aside > button > a > svg {
                             height: 4ch;
                             width: 5ch;
                             position: relative;
                             bottom: 1.5px;
-                        }
-                    }
-                }
-                .active {
+    }
+    .loggedInLandingPage > aside > .active {
                     width: 100px;
                     height: 6ch;
-                }
-                .active::before {
+    }
+    .loggedInLandingPage > aside > .active::before {
                     width: 100%;
                     height: 7ch;
-                }
-            }
-            main {
-                div {
-                    .welcomeMessageMobile {
+    }
+    .loggedInLandingPage > main > div > .welcomeMessageMobile {
                         display: flex;
                         flex-direction: column;
                         align-items: flex-start;
                         width: 100%;
                         padding-left: 1rem;
                         gap: 0;
-
-                        span {
+    }
+    .loggedInLandingPage > main > div > .welcomeMessageMobile > span {
                             font-size: 2rem;
                             font-weight: 600;
-                        }
-                    }
-                    ul {
+    }
+    .loggedInLandingPage > main > div > ul {
                         grid-template: 1fr / repeat( 1, 1fr );  
                         gap: 24px;
-
-                        li {
+    }
+    .loggedInLandingPage > main > div > ul > li {
                             left: -2.5ch;
                             max-width: 350px;
-
-                            .folderModifies {
-                                span, button, a {
+    }
+    .loggedInLandingPage > main > div > ul > li > .folderDetails > p:last-child {
+        left: 7.5ch;
+    }
+    .loggedInLandingPage > main > div > ul > li > .folderModifies > span,
+    .loggedInLandingPage > main > div > ul > li > .folderModifies > button,
+    .loggedInLandingPage > main > div > ul > li > .folderModifies > a {
                                     width: 50px;
-                                }
-                            }
-                        }
-                    }
-                    form {
-                        label {
+    }
+    .loggedInLandingPage > main > div > form > label {
                             width: 350px;
-                        }
-                    }
-                }
-            }
-        }
-        footer {
+    }
+    footer {
             display: none;
-        }
     }
 }
