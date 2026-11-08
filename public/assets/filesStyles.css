@@ -281,6 +281,11 @@
             align-items: center;
             margin-top: 2rem;
 }
+.subContainer > main > .emptyFiles > form >  p  {
+                color: #900603;
+                font-size: 1.1rem;
+                font-weight: 600;
+}
 .subContainer > main > .emptyFiles > form > label {
                 display: flex;
                 flex-direction: column;
@@ -330,18 +335,25 @@
 }
 .subContainer > main > .emptyFiles > form > .uploadBtn {
                 margin-top: 1rem;
-                padding: 1rem 2rem;
+                padding: .4rem 2rem;
                 border-radius: .4rem;           
                 background-color: #D98327;
-                /* outline: 2px solid var( --btn-color ); */
+                color: var(--secondary-bg-color);
                 border: none;
                 transition: all 250ms ease;
+                display: flex;
+                align-items: center;
+                gap: 5px;
 }
 .subContainer > main > .emptyFiles > form > .uploadBtn:hover {
                     box-shadow: var( --box-shadow );
                     outline: none;
                     transform: scale( 1.1 );
                     cursor: pointer;
+}
+.subContainer > main > .emptyFiles > form > .uploadBtn > svg {
+                                width: 2.5ch;
+                                height: 3ch;
 }
 .subContainer > main > ul {
         display: grid;
