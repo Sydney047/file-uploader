@@ -232,7 +232,7 @@ nav {
 }
 .loggedInLandingPage > main > div > .emptyFolder {
             width: 100%;
-            height: 40vh;
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -492,7 +492,7 @@ footer > div > p {
                 align-content: center;
                 justify-content: center;
                 min-height: 80px;
-                max-width: 100vw;
+                max-width: 100%;
                 border-radius: 16px;
                 position: sticky;
                 bottom: 0;
