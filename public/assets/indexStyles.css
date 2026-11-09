@@ -236,6 +236,7 @@ nav {
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 8px;
 }
 .loggedInLandingPage > main > div > .emptyFolder > div {
                 height: 30vh;
@@ -250,6 +251,17 @@ nav {
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
+}
+.loggedInLandingPage > main > div > .emptyFolder > form > button {
+        padding: .5rem .3rem ;
+        width: 40%;
+        background-color: #F2C46A;
+        border-radius: 16px;
+        margin-top: 8px;
+        border: none;
+        font-weight: 600;
+        display: none;
+        /* box-shadow: var(--box-shadow); */
 }
 .loggedInLandingPage > main > div > .emptyFolder > p {
     font-size: .8rem;
@@ -282,8 +294,14 @@ nav {
                     text-align: center;
 }
 .loggedInLandingPage > main > div > form > button {           
-                border-radius: 0 12px 12px 0;
-                height: 4ch;
+                padding: .5rem .3rem ;
+                width: 40%;
+                background-color: #F2C46A;
+                border-radius: 16px;
+                margin-top: 8px;
+                border: none;
+                font-weight: 600;
+                display: none;
 }
 .loggedInLandingPage > main > div > h2 {
             align-self: flex-start;
@@ -524,6 +542,9 @@ footer > div > p {
                     width: 100%;
                     height: 7ch;
     }
+    .loggedInLandingPage > main > div > .emptyFolder > form > button {
+        display: inline;
+    }
     .loggedInLandingPage > main > div > .welcomeMessageMobile {
                         display: flex;
                         flex-direction: column;
@@ -554,6 +575,9 @@ footer > div > p {
     }
     .loggedInLandingPage > main > div > form > label {
                             width: 350px;
+    }
+    .loggedInLandingPage > main > div > form > button {
+        display: inline;
     }
     footer {
             display: none;
