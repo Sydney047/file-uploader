@@ -139,7 +139,8 @@
                     transition: all 250ms ease;
                     height: 3.5ch;
 }
-.subContainer > main > nav > div > .newFileForm > input::file-selector-button:hover {
+.subContainer > main > nav > div > .newFileForm > input::file-selector-button:hover,
+.subContainer > main > nav > div > .newFileForm > button:hover {
                     box-shadow: var( --box-shadow );
                     outline: none;
                     transform: scale( 1.1 );
@@ -164,9 +165,12 @@
             align-items: center;
             padding-right: 5rem;
 }
+
 .subContainer > main > nav > div:nth-child( 2 ) > form {
                 display: flex;
-                align-items: flex-end;
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
                 justify-content: center;
                 width: 100%;
 }
@@ -178,6 +182,10 @@
                     border: none;
                     transition: all 250ms ease;
                     width: 40%;
+}
+.subContainer > main > nav > div:nth-child( 2 ) > form > span {
+    color: #900603;
+    font-weight: 600;
 }
 .subContainer > main > nav > .backBtn {
             display: none;

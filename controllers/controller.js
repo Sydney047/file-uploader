@@ -7,21 +7,13 @@ const prisma = require('../lib/prisma.js');
 const crypto = require( 'node:crypto' );
 const multer = require( 'multer' );
 const cloudinary = require( 'cloudinary' ).v2;
-const fs = require( 'fs' );
+const strimifier = require( 'streamifier' );
 
-const storage = multer.diskStorage({
-    destination:  './public/data/' ,
-    filename: function( req, file, cb ){
-        crypto.randomBytes( 16, function ( err, raw ){
-            if( err ) return cb( err )
-            cb( null, file.originalname.split('.')[0] + '-' + raw.toString( 'hex' ) + '.' + file.originalname.split( '.' )[1] );              
-        })
-    }
-});
+const storage = multer.memoryStorage()
 
 const upload = multer({ 
     storage,
-    limits: { fileSize: 5 * 1024 * 1024 },
+    limits: { fileSize: 4 * 1024 * 1024 },
 });
 
 cloudinary.config({
@@ -227,7 +219,7 @@ exports.filesGet =  async ( req, res ) => {
 exports.addNewFile = ( req, res ) => {
     upload.single( 'newFile' )( req, res, async ( err ) => {
         if ( err instanceof multer.MulterError ) {
-            return res.status( 400 ).send( `Multer Error, ${ err.message }` )
+            return res.redirect( `/${ userId }/${ folderId }/files?error=${ err.message }` );
         } else if ( err ) {
             return res.status( 400 ).send( `Unexpected Error, ${ err.message }` )
         }
@@ -240,20 +232,24 @@ exports.addNewFile = ( req, res ) => {
             return res.status( 400 ).redirect( `/${ userId }/${ folderId }/files?error=No file selected` );
         }
 
-        try {
-            const uploadedFile = await cloudinary.uploader.upload( file?.path, { folder: folderName, resource_type: 'raw' } );
+        const uploadStream = cloudinary.uploader.upload_stream( 
+            {
+                resource_type: 'raw',
+                folder: `${ folderName }`,
+            },
+            async ( error, result ) => {
+                if ( error ) {
+                    console.error('Cloudinary Upload Error:', error );                      
+                    return res.redirect( `/${ userId }/${ folderId }/files?error=${ error.message } ` );
+                }
 
-            await db.createNewFile( +folderId, file.filename, file.size, file.mimetype, uploadedFile.secure_url, uploadedFile.public_id );
-        } catch (error) {
-            console.log( 'Uploading error:' + error.message );
-            return res.redirect( `/${ userId }/${ folderId }/files?error=${ error.message } ` );
-        } finally {
-            fs.unlink( file?.path, err => {
-                console.log( err );
-            } );
-        }
+                await db.createNewFile( +folderId, file.originalname, file.size, file.mimetype, result.secure_url, result.public_id );
+                res.redirect( `/${ userId }/${ folderId }/files`  );
+            }
+        )
 
-        res.redirect( `/${ userId }/${ folderId }/files`  );
+        strimifier.createReadStream( file.buffer ).pipe( uploadStream );
+
     }) 
         
 }
