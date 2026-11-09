@@ -234,7 +234,7 @@ exports.addNewFile = ( req, res ) => {
 
         const uploadStream = cloudinary.uploader.upload_stream( 
             {
-                resource_type: 'raw',
+                resource_type: 'auto',
                 folder: `${ folderName }`,
             },
             async ( error, result ) => {
